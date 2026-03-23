@@ -24,6 +24,10 @@ const productSlice = createSlice({
     },
 
     setWishlist: (state, action) => {
+      const id = action.payload.id;
+      if (state.wishlist.find((item) => item.id === id)) {
+        return;
+      }
       state.wishlist = [action.payload, ...state.wishlist];
     },
 
@@ -33,7 +37,11 @@ const productSlice = createSlice({
     },
 
     setCart: (state, action) => {
-      state.cart = [...state.cart, action.payload];
+      const id = action.payload.id;
+      if (state.cart.find((item) => item.id === id)) {
+        return;
+      }
+      state.cart = [action.payload, ...state.cart];
     },
 
     removeCart: (state, action) => {

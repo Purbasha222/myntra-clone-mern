@@ -26,7 +26,7 @@ const ProductCard = ({ item, index }) => {
         {isHovering && (
           <div className="flex justify-center items-center">
             <button
-              className="flex justify-center items-center border border-gray-300 px-12 gap-2 font-bold"
+              className="flex justify-center items-center border border-gray-300 px-12 gap-2 font-bold cursor-pointer"
               onClick={(e) => {
                 e.stopPropagation();
                 dispatch(setWishlist(item));

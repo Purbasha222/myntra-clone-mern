@@ -2,6 +2,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { useEffect } from "react";
 import { fetchProducts, setCart } from "../redux/SLice/productSlice";
+import { HiOutlineShoppingBag } from "react-icons/hi2";
+import { GoHeart } from "react-icons/go";
 
 const ProductDetails = () => {
   const { id } = useParams();
@@ -38,12 +40,19 @@ const ProductDetails = () => {
       <div className="flex flex-col gap-2">
         <p className="text-lg font-bold text-gray-800">{item.brand}</p>
         <span className="text-gray-600">{item.title}</span>
+        <p className="text-sm text-gray-500">{item.description}</p>
         <p className="text-yellow-500 font-medium">⭐ {item.rating}</p>
         {item.price && (
           <p className="text-xl font-semibold text-gray-900">₹{item.price}</p>
         )}
-        <p className="text-sm text-gray-500 mt-2">{item.description}</p>
-        <button onClick={() => dispatch(setCart(item))}>Add to Cart</button>
+        <div>
+          <button
+            onClick={() => dispatch(setCart(item))}
+            className="flex items-center border cursor-pointer p-2"
+          >
+            <HiOutlineShoppingBag /> Add to Bag
+          </button>
+        </div>
       </div>
     </div>
   );

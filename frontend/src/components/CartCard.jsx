@@ -3,7 +3,7 @@ import { removeCart } from "../redux/SLice/productSlice";
 import { useNavigate } from "react-router-dom";
 import { HiOutlineShoppingBag } from "react-icons/hi2";
 
-const CartCard = ({ item, index }) => {
+const CartCard = ({ item, index, handleCheckBox, selectedItems }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   return (
@@ -12,6 +12,14 @@ const CartCard = ({ item, index }) => {
       onClick={() => navigate(`/products/${item.id}`)}
       className="flex items-center border"
     >
+      <input
+        type="checkbox"
+        checked={selectedItems.includes(item.id)}
+        onClick={(e) => {
+          e.stopPropagation();
+          handleCheckBox(item.id);
+        }}
+      />
       <img src={item.thumbnail} alt="" className="h-60 w-80" />
       <div className="flex flex-col">
         <p className="text-lg font-bold text-gray-800">{item.brand}</p>

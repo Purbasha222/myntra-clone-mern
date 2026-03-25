@@ -12,7 +12,7 @@ const Products = () => {
   useEffect(() => {
     dispatch(fetchProducts());
   }, [dispatch]);
-  
+
   const filtered = products.filter((item) => item.category === category);
 
   return (

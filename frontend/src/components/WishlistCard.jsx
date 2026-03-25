@@ -30,6 +30,7 @@ const WishlistCard = ({ item, index }) => {
           >
             <RiDeleteBinLine /> Remove from Wishlist
           </button>
+
           <button
             onClick={(e) => {
               e.stopPropagation();

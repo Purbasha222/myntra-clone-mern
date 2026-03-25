@@ -4,11 +4,14 @@ import { useEffect } from "react";
 import { fetchProducts, setCart } from "../redux/SLice/productSlice";
 import { HiOutlineShoppingBag } from "react-icons/hi2";
 import { GoHeart } from "react-icons/go";
+import toast from "react-hot-toast";
 
 const ProductDetails = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const products = useSelector((state) => state.product.products);
+  const cartItems = useSelector((state) => state.product.cart);
+  const alreadyInCart = cartItems.find((item) => item.id === Number(id));
 
   useEffect(() => {
     dispatch(fetchProducts());
@@ -47,7 +50,14 @@ const ProductDetails = () => {
         )}
         <div>
           <button
-            onClick={() => dispatch(setCart(item))}
+            onClick={() => {
+              if (alreadyInCart) {
+                toast.error("Already in cart!");
+              } else {
+                toast.success("Product added to cart!");
+                dispatch(setCart(item));
+              }
+            }}
             className="flex items-center border cursor-pointer p-2"
           >
             <HiOutlineShoppingBag /> Add to Bag

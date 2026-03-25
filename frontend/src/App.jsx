@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Home from "./screens/Home";
 import Footer from "./components/Footer";
@@ -7,11 +7,16 @@ import Products from "./screens/Products";
 import Wishlist from "./screens/Wishlist";
 import ProductDetails from "./screens/ProductDetails";
 import Cart from "./screens/Cart";
+import { Toaster } from "react-hot-toast";
+import CartNavbar from "./components/CartNavbar";
 
 function App() {
+  const location = useLocation();
+  const isCartPage = location.pathname === "/bag";
   return (
     <div className="pt-20 min-h-screen flex flex-col mt-auto">
-      <Navbar />
+      {isCartPage ? <CartNavbar /> : <Navbar />}
+      <Toaster position="top-center" />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/products" element={<Products />} />

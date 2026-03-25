@@ -1,13 +1,18 @@
 import { useState } from "react";
 import { GoHeart } from "react-icons/go";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { setWishlist } from "../redux/SLice/productSlice";
+import toast from "react-hot-toast";
 
 const ProductCard = ({ item, index }) => {
   const [isHovering, setIsHovering] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const wishlistItems = useSelector((state) => state.product.wishlist);
+  const alreadyInWishlist = wishlistItems.find(
+    (wishlistItem) => wishlistItem.id === item.id,
+  );
 
   return (
     <div
@@ -29,7 +34,12 @@ const ProductCard = ({ item, index }) => {
               className="flex justify-center items-center border border-gray-300 px-12 gap-2 font-bold cursor-pointer"
               onClick={(e) => {
                 e.stopPropagation();
-                dispatch(setWishlist(item));
+                if (alreadyInWishlist) {
+                  toast.error("Already in wishlist!");
+                } else {
+                  toast.success("Product added to wishlist");
+                  dispatch(setWishlist(item));
+                }
               }}
             >
               <GoHeart fontSize={20} /> WISHLIST

@@ -1,12 +1,15 @@
 import { RiDeleteBinLine } from "react-icons/ri";
 import { HiOutlineShoppingBag } from "react-icons/hi2";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { removeWishlist, setCart } from "../redux/SLice/productSlice";
 import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 const WishlistCard = ({ item, index }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const cartItems = useSelector((state) => state.product.cart);
+  const alreadyInCart = cartItems.find((cartItem) => cartItem.id === item.id);
   return (
     <div
       className="flex items-center border"
@@ -26,6 +29,7 @@ const WishlistCard = ({ item, index }) => {
             onClick={(e) => {
               e.stopPropagation();
               dispatch(removeWishlist(item));
+              toast.error("Product removed from wishlist!");
             }}
           >
             <RiDeleteBinLine /> Remove from Wishlist
@@ -34,7 +38,13 @@ const WishlistCard = ({ item, index }) => {
           <button
             onClick={(e) => {
               e.stopPropagation();
-              dispatch(setCart(item));
+              if (alreadyInCart) {
+                toast.error("Product already in cart!");
+              } else {
+                dispatch(setCart(item));
+                dispatch(removeWishlist(item));
+                toast.success("Product added to cart!");
+              }
             }}
             className="flex items-center cursor-pointer border p-3"
           >

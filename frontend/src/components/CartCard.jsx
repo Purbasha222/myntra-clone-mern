@@ -2,6 +2,7 @@ import { useDispatch } from "react-redux";
 import { removeCart } from "../redux/SLice/productSlice";
 import { useNavigate } from "react-router-dom";
 import { HiOutlineShoppingBag } from "react-icons/hi2";
+import toast from "react-hot-toast";
 
 const CartCard = ({ item, index, handleCheckBox, selectedItems }) => {
   const navigate = useNavigate();
@@ -10,10 +11,11 @@ const CartCard = ({ item, index, handleCheckBox, selectedItems }) => {
     <div
       key={index}
       onClick={() => navigate(`/products/${item.id}`)}
-      className="flex items-center border"
+      className="flex gap-5 p-2 border border-gray-300"
     >
       <input
         type="checkbox"
+        className=""
         checked={selectedItems.includes(item.id)}
         onClick={(e) => {
           e.stopPropagation();
@@ -32,6 +34,7 @@ const CartCard = ({ item, index, handleCheckBox, selectedItems }) => {
             onClick={(e) => {
               e.stopPropagation();
               dispatch(removeCart(item));
+              toast.error("Product removed from bag");
             }}
           >
             <HiOutlineShoppingBag /> Remove from Bag

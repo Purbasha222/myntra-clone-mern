@@ -11,14 +11,14 @@ const CartNavbar = () => {
           className="h-20 cursor-pointer"
           onClick={() => navigate("/")}
         />
+      </div>
 
-        <div className="flex gap-8 items-center pl-10">
-          <p>BAG</p>
-          <span>.........</span>
-          <p>ADDRESS</p>
-          <span>.........</span>
-          <p>PAYMENT</p>
-        </div>
+      <div className="absolute left-1/2 -translate-x-1/2 flex gap-3 items-center pl-10">
+        <p>BAG</p>
+        <span>----------</span>
+        <p>ADDRESS</p>
+        <span>----------</span>
+        <p>PAYMENT</p>
       </div>
     </nav>
   );

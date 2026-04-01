@@ -33,7 +33,7 @@ const Cart = () => {
             ))}
           </div>
           <div className="border-l border-gray-300 p-10">
-            <h2 className="font-bold text-gray-500">COUPONS</h2>
+            <h2 className="font-bold text-gray-500 mb-5">COUPONS</h2>
             <div className="flex justify-between items-center">
               <p className="flex gap-2 items-center font-semibold">
                 <span>
@@ -41,7 +41,7 @@ const Cart = () => {
                 </span>{" "}
                 Apply Coupons
               </p>
-              <button className="border border-pink-600 rounded-md p-2 text-pink-600 font-bold">
+              <button className="border border-pink-600 px-2 text-pink-600 font-semibold">
                 APPLY
               </button>
             </div>

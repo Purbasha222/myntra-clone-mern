@@ -13,7 +13,7 @@ const Products = () => {
     dispatch(fetchProducts());
   }, [dispatch]);
 
-  const filtered = products.filter((item) => item.category === category);
+  const filtered = products.filter((item) => item.category === category) || [];
 
   return (
     <div className="grid grid-cols-5 p-20 gap-y-8">

@@ -9,6 +9,7 @@ import ProductDetails from "./screens/ProductDetails";
 import Cart from "./screens/Cart";
 import { Toaster } from "react-hot-toast";
 import CartNavbar from "./components/CartNavbar";
+import Login from "./components/auth/Login";
 
 function App() {
   const location = useLocation();
@@ -18,15 +19,15 @@ function App() {
       {isCartPage ? <CartNavbar /> : <Navbar />}
       <Toaster position="top-center" />
       <Routes>
+        <Route path="/login" element={<Login />} />
         <Route path="/" element={<Home />} />
         <Route path="/products" element={<Products />} />
-        <Route path="/categories/:category" element={<Products />} />
         <Route path="/products/:id" element={<ProductDetails />} />
-        <Route path="/profile" element={<h1>Profile Page</h1>} />
+        <Route path="/categories/:category" element={<Products />} />
         <Route path="/wishlist" element={<Wishlist />} />
         <Route path="/bag" element={<Cart />} />
       </Routes>
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 }

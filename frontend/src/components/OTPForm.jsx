@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import OTPInput from "./OTPInput";
 import { useDispatch } from "react-redux";
 import { login } from "../redux/SLice/authSlice";
+import { BASE_URL } from "../config";
 
 const OTPForm = () => {
   const inputRef = useRef(null);
@@ -26,7 +27,7 @@ const OTPForm = () => {
     }
 
     try {
-      const res = await fetch("http://localhost:8000/auth/sendOtp", {
+      const res = await fetch(`${BASE_URL}/auth/sendOtp`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email }),
@@ -45,7 +46,7 @@ const OTPForm = () => {
 
   const onOtpSubmit = async (otp) => {
     try {
-      const res = await fetch("http://localhost:8000/auth/verifyOtp", {
+      const res = await fetch(`${BASE_URL}/auth/verifyOtp`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, otp }),

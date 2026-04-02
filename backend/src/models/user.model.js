@@ -7,11 +7,12 @@ const userSchema = new mongoose.Schema(
     otp: { type: String, default: null },
     otpExpiresAt: { type: Date, default: null },
     cart: [
-      { productId: { type: mongoose.Schema.Types.ObjectId, ref: "product" } },
+      {
+        productId: { type: Number, ref: "product" },
+        quantity: { type: Number },
+      },
     ],
-    wishlist: [
-      { productId: { type: mongoose.Schema.Types.ObjectId, ref: "product" } },
-    ],
+    wishlist: [{ productId: { type: Number, ref: "product" } }],
   },
   { timestamps: true },
 );

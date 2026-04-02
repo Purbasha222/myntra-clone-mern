@@ -2,16 +2,16 @@ import { useState } from "react";
 import { GoHeart } from "react-icons/go";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { setWishlist } from "../redux/SLice/productSlice";
+import { addToWishlist } from "../redux/SLice/wishlistSlice";
 import toast from "react-hot-toast";
 
 const ProductCard = ({ item, index }) => {
   const [isHovering, setIsHovering] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const wishlistItems = useSelector((state) => state.product.wishlist);
+  const wishlistItems = useSelector((state) => state.wishlist.wishlistItems);
   const alreadyInWishlist = wishlistItems.find(
-    (wishlistItem) => wishlistItem.id === item.id,
+    (wishlistItem) => wishlistItem.productId === item.id,
   );
 
   return (
@@ -38,7 +38,7 @@ const ProductCard = ({ item, index }) => {
                   toast.error("Already in wishlist!");
                 } else {
                   toast.success("Product added to wishlist");
-                  dispatch(setWishlist(item));
+                  dispatch(addToWishlist({ productId: item.id }));
                 }
               }}
             >

@@ -1,7 +1,8 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { useEffect } from "react";
-import { fetchProducts, setCart } from "../redux/SLice/productSlice";
+import { fetchProducts } from "../redux/SLice/productSlice";
+import { addToCart } from "../redux/SLice/cartSlice";
 import { HiOutlineShoppingBag } from "react-icons/hi2";
 import { GoHeart } from "react-icons/go";
 import toast from "react-hot-toast";
@@ -10,8 +11,8 @@ const ProductDetails = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const products = useSelector((state) => state.product.products);
-  const cartItems = useSelector((state) => state.product.cart);
-  const alreadyInCart = cartItems.find((item) => item.id === Number(id));
+  const cartItems = useSelector((state) => state.cart.cartItems);
+  const alreadyInCart = cartItems.find((item) => item.productId === Number(id));
 
   useEffect(() => {
     dispatch(fetchProducts());
@@ -55,7 +56,7 @@ const ProductDetails = () => {
                 toast.error("Already in cart!");
               } else {
                 toast.success("Product added to cart!");
-                dispatch(setCart(item));
+                dispatch(addToCart({ productId: item.id, quantity: 1 }));
               }
             }}
             className="flex items-center border cursor-pointer p-2"

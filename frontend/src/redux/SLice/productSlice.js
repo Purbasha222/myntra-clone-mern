@@ -14,40 +14,12 @@ const productSlice = createSlice({
   name: "product",
   initialState: {
     products: [],
-    wishlist: [],
-    cart: [],
     loading: false,
     error: null,
   },
   reducers: {
     setProducts: (state, action) => {
       state.products = action.payload;
-    },
-
-    setWishlist: (state, action) => {
-      const id = action.payload.id;
-      if (state.wishlist.find((item) => item.id === id)) {
-        return;
-      }
-      state.wishlist = [action.payload, ...state.wishlist];
-    },
-
-    removeWishlist: (state, action) => {
-      const id = action.payload.id;
-      state.wishlist = state.wishlist.filter((item) => item.id !== id);
-    },
-
-    setCart: (state, action) => {
-      const id = action.payload.id;
-      if (state.cart.find((item) => item.id === id)) {
-        return;
-      }
-      state.cart = [action.payload, ...state.cart];
-    },
-
-    removeCart: (state, action) => {
-      const id = action.payload.id;
-      state.cart = state.cart.filter((item) => item.id !== id);
     },
   },
   extraReducers: (builder) => {
@@ -68,5 +40,4 @@ const productSlice = createSlice({
 
 export default productSlice;
 
-export const { setProducts, setWishlist, removeWishlist, setCart, removeCart } =
-  productSlice.actions;
+export const { setProducts } = productSlice.actions;

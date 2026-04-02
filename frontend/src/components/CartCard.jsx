@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { removeCart } from "../redux/SLice/productSlice";
+import { removeFromCart } from "../redux/SLice/cartSlice";
 import { useNavigate } from "react-router-dom";
 import { HiOutlineShoppingBag } from "react-icons/hi2";
 import toast from "react-hot-toast";
@@ -33,7 +33,7 @@ const CartCard = ({ item, index, handleCheckBox, selectedItems }) => {
             className="flex items-center cursor-pointer border p-2"
             onClick={(e) => {
               e.stopPropagation();
-              dispatch(removeCart(item));
+              dispatch(removeFromCart({ productId: item.id }));
               toast.error("Product removed from bag");
             }}
           >

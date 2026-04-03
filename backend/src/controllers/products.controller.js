@@ -1,9 +1,4 @@
-import mongoose from "mongoose";
-
-const Product = mongoose.model(
-  "Product",
-  new mongoose.Schema({}, { strict: false }),
-);
+import Product from "../models/product.model.js";
 
 // Get all Products
 export const getAllProducts = async (req, res) => {

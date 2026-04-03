@@ -5,13 +5,16 @@ export const fetchCart = createAsyncThunk(
   "/cart/fetchCart",
   async (_, thunkAPI) => {
     const token = thunkAPI.getState().auth.token;
+    console.log("fetchCart token:", token);
     const res = await fetch(`${BASE_URL}/api/cart`, {
       method: "GET",
       headers: {
         Authorization: `Bearer ${token}`,
       },
     });
+    console.log("fetchCart response status:", res.status);
     const data = await res.json();
+    console.log("fetchCart data:", data);
     return data;
   },
 );
@@ -72,19 +75,9 @@ const cartSlice = createSlice({
     error: null,
   },
   extraReducers: (builder) => {
-    builder
-      .addCase(fetchCart.fulfilled, (state, action) => {
-        state.cartItems = action.payload;
-      })
-      .addCase(addToCart.fulfilled, (state) => {
-        state.loading = false;
-      })
-      .addCase(updateCart.fulfilled, (state) => {
-        state.loading = false;
-      })
-      .addCase(removeFromCart.fulfilled, (state) => {
-        state.loading = false;
-      });
+    builder.addCase(fetchCart.fulfilled, (state, action) => {
+      state.cartItems = action.payload;
+    });
   },
 });
 

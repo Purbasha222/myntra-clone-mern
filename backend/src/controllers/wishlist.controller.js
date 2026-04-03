@@ -1,9 +1,26 @@
+import Product from "../models/product.model.js";
 import User from "../models/user.model.js";
 
 export const getWishlist = async (req, res) => {
   try {
     const user = await User.findById(req.userId);
-    res.status(200).json(user.wishlist);
+
+    const enrichedWishlist = await Promise.all(
+      user.wishlist.map(async (wishlistItem) => {
+        const product = await Product.findOne({
+          id: Number(wishlistItem.productId),
+        });
+
+        if (!product) return null;
+
+        return {
+          ...product.toObject(),
+          quantity: wishlistItem.quantity,
+          productId: wishlistItem.productId,
+        };
+      }),
+    );
+    res.status(200).json(enrichedWishlist.filter(Boolean));
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -15,7 +32,7 @@ export const addToWishlist = async (req, res) => {
     const user = await User.findById(req.userId);
 
     if (user.wishlist.find((item) => item.productId === productId)) {
-      res.status(401).json({ message: "Product already in wishlist" });
+      res.status(409).json({ message: "Product already in wishlist" });
     } else {
       user.wishlist.push({ productId });
       await user.save();

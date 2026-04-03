@@ -1,21 +1,51 @@
+import Product from "../models/product.model.js";
 import User from "../models/user.model.js";
 
 export const getCart = async (req, res) => {
   try {
     const user = await User.findById(req.userId);
-    res.status(200).json(user.cart);
+
+    const testProduct = await Product.findOne({});
+    console.log("Test product:", testProduct);
+
+    const enrichedCart = await Promise.all(
+      user.cart.map(async (cartItem) => {
+        console.log(
+          "Looking for productId:",
+          cartItem.productId,
+          typeof cartItem.productId,
+        );
+        const product = await Product.findOne({
+          id: Number(cartItem.productId),
+        });
+        console.log("Found product:", product ? product.title : "NULL");
+
+        if (!product) {
+          console.log("Product not found for productId:", cartItem.productId);
+          return null;
+        }
+
+        return {
+          ...product.toObject(),
+          quantity: cartItem.quantity,
+          productId: cartItem.productId,
+        };
+      }),
+    );
+    res.status(200).json(enrichedCart.filter(Boolean));
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 };
 
 export const addToCart = async (req, res) => {
+  console.log("addToCart hit", req.userId, req.body);
   try {
     const { productId, quantity } = req.body;
     const user = await User.findById(req.userId);
 
     if (user.cart.find((item) => item.productId === productId)) {
-      res.status(401).json({ message: "Product already in cart" });
+      res.status(409).json({ message: "Product already in cart" });
     } else {
       user.cart.push({ productId, quantity });
       await user.save();

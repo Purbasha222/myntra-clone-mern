@@ -72,19 +72,9 @@ const wishlistSlice = createSlice({
     error: null,
   },
   extraReducers: (builder) => {
-    builder
-      .addCase(fetchWishlist.fulfilled, (state, action) => {
-        state.wishlistItems = action.payload;
-      })
-      .addCase(addToWishlist.fulfilled, (state) => {
-        state.loading = false;
-      })
-      .addCase(moveToCart.fulfilled, (state) => {
-        state.loading = false;
-      })
-      .addCase(removeFromWishlist.fulfilled, (state) => {
-        state.loading = false;
-      });
+    builder.addCase(fetchWishlist.fulfilled, (state, action) => {
+      state.wishlistItems = action.payload;
+    });
   },
 });
 

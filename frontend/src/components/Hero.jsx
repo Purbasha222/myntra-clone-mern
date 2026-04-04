@@ -2,13 +2,13 @@ import heroVideo from "../assets/heroVideo.mp4";
 
 const Hero = () => {
   return (
-    <div className="w-full h-screen overflow-hidden">
+    <div className="mt-15 w-full h-100 overflow-hidden">
       <video
         src={heroVideo}
         autoPlay
         loop
         muted
-        className="w-full h-full object-cover"
+        className="w-full h-100 object-fit"
       />
     </div>
   );

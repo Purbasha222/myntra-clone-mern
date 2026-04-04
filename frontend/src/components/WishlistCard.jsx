@@ -33,7 +33,7 @@ const WishlistCard = ({ item, index }) => {
             className="flex items-center cursor-pointer border p-3"
             onClick={(e) => {
               e.stopPropagation();
-              dispatch(removeFromWishlist({ productId: item.productId }));
+              dispatch(removeFromWishlist({ id: item.id }));
               toast.error("Product removed from wishlist!");
             }}
           >

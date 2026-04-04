@@ -23,9 +23,9 @@ const Slider = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentPage((p) => (p === totalPages ? 1 : p + 1));
-    }, 3000); // slides every 3 seconds
+    }, 3000);
 
-    return () => clearInterval(interval); // cleanup
+    return () => clearInterval(interval);
   }, [totalPages]);
 
   return (
@@ -49,9 +49,7 @@ const Slider = () => {
             onClick={() => setCurrentPage(i + 1)}
             className={`rounded-full transition-all duration-300 
         ${
-          currentPage === i + 1
-            ? "bg-gray-800 w-3 h-3" // active dot — dark and bigger
-            : "bg-gray-300 w-2 h-2" // inactive dot — light and smaller
+          currentPage === i + 1 ? "bg-gray-800 w-3 h-3" : "bg-gray-300 w-2 h-2"
         }`}
           />
         ))}

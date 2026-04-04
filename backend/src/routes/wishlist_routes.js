@@ -1,20 +1,20 @@
-import express from "express";
-import {
-  addToWishlist,
-  getWishlist,
-  moveToCart,
-  removeFromWishlist,
-} from "../controllers/wishlist.controller.js";
-import { auth } from "../middlewares/auth.middleware.js";
+// import express from "express";
+// import {
+//   addToWishlist,
+//   getWishlist,
+//   moveToCart,
+//   removeFromWishlist,
+// } from "../controllers/wishlist.controller.js";
+// import { auth } from "../middlewares/auth.middleware.js";
 
-const route = express.Router();
+// const route = express.Router();
 
-route.get("/", auth, getWishlist);
+// route.get("/", auth, getWishlist);
 
-route.post("/addToWishlist", auth, addToWishlist);
+// route.post("/addToWishlist", auth, addToWishlist);
 
-route.post("/moveToCart", auth, moveToCart);
+// route.post("/moveToCart", auth, moveToCart);
 
-route.delete("/removeFromWishlist", auth, removeFromWishlist);
+// route.delete("/removeFromWishlist", auth, removeFromWishlist);
 
-export default route;
+// export default route;

@@ -1,15 +1,16 @@
 import { useDispatch, useSelector } from "react-redux";
 import WishlistCard from "../components/WishlistCard";
-import { useEffect } from "react";
-import { fetchWishlist } from "../redux/SLice/wishlistSlice";
+// import { useEffect } from "react";
+// import { fetchWishlist } from "../redux/SLice/wishlistSlice";
 
 const Wishlist = () => {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const wishlistItems = useSelector((state) => state.wishlist.wishlistItems);
+  console.log(wishlistItems, "taylor swift");
 
-  useEffect(() => {
-    dispatch(fetchWishlist());
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(fetchWishlist());
+  // }, [dispatch]);
 
   return (
     <>

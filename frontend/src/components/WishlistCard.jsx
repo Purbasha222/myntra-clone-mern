@@ -1,21 +1,20 @@
 import { RiDeleteBinLine } from "react-icons/ri";
 import { HiOutlineShoppingBag } from "react-icons/hi2";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  removeFromWishlist,
-  moveToCart,
-  fetchWishlist,
-} from "../redux/SLice/wishlistSlice";
+import { removeFromWishlist } from "../redux/SLice/wishlistSlice";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
+import { addToCart } from "../redux/SLice/cartSlice";
 
 const WishlistCard = ({ item, index }) => {
+  console.log(item, "have more sex");
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart.cartItems);
   const alreadyInCart = cartItems.find(
     (cartItem) => cartItem.productId === item.id,
   );
+
   return (
     <div
       className="flex items-center border"
@@ -34,9 +33,7 @@ const WishlistCard = ({ item, index }) => {
             className="flex items-center cursor-pointer border p-3"
             onClick={(e) => {
               e.stopPropagation();
-              dispatch(removeFromWishlist({ productId: item.productId }))
-                .unwrap()
-                .then(() => dispatch(fetchWishlist()));
+              dispatch(removeFromWishlist({ productId: item.productId }));
               toast.error("Product removed from wishlist!");
             }}
           >
@@ -49,13 +46,8 @@ const WishlistCard = ({ item, index }) => {
               if (alreadyInCart) {
                 toast.error("Product already in cart!");
               } else {
-                dispatch(moveToCart({ productId: item.id }))
-                  .unwrap()
-                  .then(() =>
-                    dispatch(removeFromWishlist({ productId: item.id }))
-                      .unwrap()
-                      .then(() => dispatch(fetchWishlist())),
-                  );
+                dispatch(addToCart(item));
+                dispatch(removeFromWishlist({ id: item.id }));
                 toast.success("Product added to cart!");
               }
             }}

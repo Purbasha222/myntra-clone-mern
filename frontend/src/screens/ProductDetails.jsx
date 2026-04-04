@@ -56,7 +56,7 @@ const ProductDetails = () => {
                 toast.error("Already in cart!");
               } else {
                 toast.success("Product added to cart!");
-                dispatch(addToCart({ productId: item.id, quantity: 1 }));
+                dispatch(addToCart(item));
               }
             }}
             className="flex items-center border cursor-pointer p-2"

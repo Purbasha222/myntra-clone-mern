@@ -2,16 +2,16 @@ import { useDispatch, useSelector } from "react-redux";
 import CartCard from "../components/CartCard";
 import { useEffect, useState } from "react";
 import { LuTag } from "react-icons/lu";
-import { fetchCart } from "../redux/SLice/cartSlice";
+// import { fetchCart } from "../redux/SLice/cartSlice";
 
 const Cart = () => {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart.cartItems);
   const [selectedItems, setSelectedItems] = useState([]);
 
-  useEffect(() => {
-    dispatch(fetchCart());
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(fetchCart());
+  // }, [dispatch]);
 
   console.log("cartItems:", cartItems);
 
@@ -23,7 +23,7 @@ const Cart = () => {
     }
   };
 
-  const total = cartItems
+  const totalPrice = cartItems
     .filter((item) => selectedItems.includes(item.id))
     .reduce((acc, item) => acc + item.price, 0);
 
@@ -54,7 +54,7 @@ const Cart = () => {
                 APPLY
               </button>
             </div>
-            <p>{total}</p> <button>Buy Now</button>
+            <p>{totalPrice.toFixed(2)}</p> <button>Buy Now</button>
           </div>
         </div>
       ) : (

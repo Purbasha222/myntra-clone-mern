@@ -10,7 +10,7 @@ import wishlistSlice from "./SLice/wishlistSlice";
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: ["auth"],
+  whitelist: ["auth", "cart", "wishlist"],
 };
 
 const rootReducer = combineReducers({

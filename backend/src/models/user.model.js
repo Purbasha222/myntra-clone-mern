@@ -6,13 +6,13 @@ const userSchema = new mongoose.Schema(
     isVerified: { type: Boolean, default: false },
     otp: { type: String, default: null },
     otpExpiresAt: { type: Date, default: null },
-    cart: [
-      {
-        productId: { type: Number, ref: "product" },
-        quantity: { type: Number },
-      },
-    ],
-    wishlist: [{ productId: { type: Number, ref: "product" } }],
+    // cart: [
+    //   {
+    //     productId: { type: Number, ref: "product" },
+    //     quantity: { type: Number },
+    //   },
+    // ],
+    // wishlist: [{ productId: { type: Number, ref: "product" } }],
   },
   { timestamps: true },
 );

@@ -38,7 +38,7 @@ const ProductCard = ({ item, index }) => {
                   toast.error("Already in wishlist!");
                 } else {
                   toast.success("Product added to wishlist");
-                  dispatch(addToWishlist({ productId: item.id }));
+                  dispatch(addToWishlist(item));
                 }
               }}
             >

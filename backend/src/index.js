@@ -4,8 +4,8 @@ import cors from "cors";
 import { connectDB } from "./config/db.js";
 import productRoutes from "./routes/product_routes.js";
 import userRoutes from "./routes/user_routes.js";
-import cartRoutes from "./routes/cart_routes.js";
-import wishlistRoutes from "./routes/wishlist_routes.js";
+// import cartRoutes from "./routes/cart_routes.js";
+// import wishlistRoutes from "./routes/wishlist_routes.js";
 
 dotenv.config();
 const app = express();
@@ -18,8 +18,8 @@ app.use((req, res, next) => {
 
 app.use("/api/products", productRoutes);
 app.use("/auth", userRoutes);
-app.use("/api/cart", cartRoutes);
-app.use("/api/wishlist", wishlistRoutes);
+// app.use("/api/cart", cartRoutes);
+// app.use("/api/wishlist", wishlistRoutes);
 const PORT = process.env.PORT || 3000;
 
 connectDB().then(() => {

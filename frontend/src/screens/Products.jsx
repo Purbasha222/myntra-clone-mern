@@ -7,13 +7,16 @@ import { fetchProducts } from "../redux/SLice/productSlice";
 const Products = () => {
   const { category } = useParams();
   const dispatch = useDispatch();
+  console.log(category);
   const products = useSelector((state) => state.product.products);
+  console.log(products);
 
   useEffect(() => {
     dispatch(fetchProducts());
   }, [dispatch]);
 
   const filtered = products.filter((item) => item.category === category) || [];
+  console.log(filtered);
 
   return (
     <div className="grid grid-cols-5 p-20 gap-y-8">

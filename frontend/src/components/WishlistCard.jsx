@@ -1,7 +1,11 @@
 import { RiDeleteBinLine } from "react-icons/ri";
 import { HiOutlineShoppingBag } from "react-icons/hi2";
 import { useDispatch, useSelector } from "react-redux";
-import { removeFromWishlist, moveToCart } from "../redux/SLice/wishlistSlice";
+import {
+  removeFromWishlist,
+  moveToCart,
+  fetchWishlist,
+} from "../redux/SLice/wishlistSlice";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 
@@ -30,7 +34,9 @@ const WishlistCard = ({ item, index }) => {
             className="flex items-center cursor-pointer border p-3"
             onClick={(e) => {
               e.stopPropagation();
-              dispatch(removeFromWishlist({ productId: item.productId }));
+              dispatch(removeFromWishlist({ productId: item.productId }))
+                .unwrap()
+                .then(() => dispatch(fetchWishlist()));
               toast.error("Product removed from wishlist!");
             }}
           >
@@ -43,14 +49,19 @@ const WishlistCard = ({ item, index }) => {
               if (alreadyInCart) {
                 toast.error("Product already in cart!");
               } else {
-                dispatch(moveToCart({ productId: item.id }));
-                dispatch(removeFromWishlist({ productId: item.id }));
+                dispatch(moveToCart({ productId: item.id }))
+                  .unwrap()
+                  .then(() =>
+                    dispatch(removeFromWishlist({ productId: item.id }))
+                      .unwrap()
+                      .then(() => dispatch(fetchWishlist())),
+                  );
                 toast.success("Product added to cart!");
               }
             }}
             className="flex items-center cursor-pointer border p-3"
           >
-            <HiOutlineShoppingBag /> Add to Bag
+            <HiOutlineShoppingBag /> Move to Bag
           </button>
         </div>
       </div>

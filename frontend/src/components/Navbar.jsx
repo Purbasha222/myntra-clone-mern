@@ -4,9 +4,20 @@ import { GoPerson } from "react-icons/go";
 import { GoHeart } from "react-icons/go";
 import Dropdown from "./Dropdown";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { useSelector } from "react-redux";
 
 const Navbar = () => {
   const navigate = useNavigate();
+  const [query, setQuery] = useState("");
+  const products = useSelector((state) => state.product.products);
+  const suggestions = products
+    .filter((product) =>
+      product.title.toLowerCase().includes(query.toLowerCase()),
+    )
+    .slice(0, 10);
+  const [showDropdown, setShowDropdown] = useState(true);
+  const [activeMenu, setActiveMenu] = useState(null);
 
   const navItems = [
     { name: "MEN", color: "after:bg-pink-500" },
@@ -26,11 +37,15 @@ const Navbar = () => {
           onClick={() => navigate("/")}
         />
       </div>
-
+      <div
+        className="flex items-center"
+        onMouseLeave={() => setActiveMenu(null)}
+      ></div>
       <div className="flex gap-8 items-center pl-10">
         {navItems.map((item) => (
           <a
             key={item.name}
+            onMouseEnter={() => setActiveMenu(item.name)}
             onClick={() => navigate(`/categories/${item.name.toLowerCase()}`)}
             className={`
         relative text-sm font-semibold cursor-pointer
@@ -45,16 +60,36 @@ const Navbar = () => {
             {item.name}
           </a>
         ))}
+        <Dropdown activeMenu={activeMenu} setActiveMenu={setActiveMenu} />
       </div>
 
-      <div className="pl-5">
+      <div className="relative pl-5">
         <input
           type="text"
-          name=""
-          id=""
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") navigate(`/search?q=${query}`);
+          }}
           placeholder="Search for products, brands and more"
+          onFocus={() => setShowDropdown(true)}
+          onBlur={() => setTimeout(() => setShowDropdown(false), 100)}
           className="w-130 p-2 bg-gray-200"
         />
+        {query.length > 0 && suggestions.length > 0 && showDropdown && (
+          <div className="absolute top-full left-0 w-full bg-white shadow-lg z-50 max-h-70 overflow-y-auto [&::-webkit-scrollbar]:hidden">
+            {suggestions.map((product) => (
+              <div
+                key={product.id}
+                onClick={() => navigate(`/products/${product.id}`)}
+                className="flex gap-3 items-center hover:bg-gray-100 hover:cursor-pointer"
+              >
+                <img src={product.thumbnail} className="h-20 w-20" />
+                <p className="text-md">{product.title}</p>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
       <div className="flex gap-7 items-center pl-16">
         <div className="cursor-pointer" onClick={() => navigate("/profile")}>
@@ -72,7 +107,6 @@ const Navbar = () => {
           <span className="text-sm font-semibold">Bag</span>
         </div>
       </div>
-      <Dropdown />
     </nav>
   );
 };

@@ -11,10 +11,20 @@ import { Toaster } from "react-hot-toast";
 import CartNavbar from "./components/CartNavbar";
 import Login from "./components/auth/Login";
 import ProtectedRoute from "./components/ProtectedRoute";
+import SearchResults from "./components/SearchResults";
+import { useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { fetchProducts } from "./redux/SLice/productSlice";
 
 function App() {
+  const dispatch = useDispatch();
   const location = useLocation();
   const isCartPage = location.pathname === "/bag";
+
+  useEffect(() => {
+    dispatch(fetchProducts());
+  }, []);
+
   return (
     <div
       className={`${location.pathname !== "/login" ? "pt-20" : ""} min-h-screen flex flex-col mt-auto`}
@@ -32,6 +42,7 @@ function App() {
             </ProtectedRoute>
           }
         />
+        <Route path="/search" element={<SearchResults />} />
         <Route
           path="/products"
           element={

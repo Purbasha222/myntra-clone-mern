@@ -18,15 +18,24 @@ const Navbar = () => {
     .slice(0, 10);
   const [showDropdown, setShowDropdown] = useState(true);
   const [activeMenu, setActiveMenu] = useState(null);
+  const navColors = {
+    WOMEN: "#FB56C1",
+    MEN: "#EE5F73",
+    KIDS: "#F26A10",
+    HOME: "#F2C210",
+    BEAUTY: "#0DB7AF",
+    GENZ: "#0DB7AF",
+    STUDIO: "#FF3F6C",
+  };
 
   const navItems = [
-    { name: "MEN", color: "after:bg-pink-500" },
-    { name: "WOMEN", color: "after:bg-purple-500" },
-    { name: "KIDS", color: "after:bg-orange-500" },
-    { name: "HOME", color: "after:bg-yellow-500" },
-    { name: "BEAUTY", color: "after:bg-green-500" },
-    { name: "GENZ", color: "after:bg-red-500" },
-    { name: "STUDIO", color: "after:bg-blue-500" },
+    { name: "MEN", color: "after:bg-myntra-men" },
+    { name: "WOMEN", color: "after:bg-myntra-women" },
+    { name: "KIDS", color: "after:bg-myntra-kids" },
+    { name: "HOME", color: "after:bg-myntra-home" },
+    { name: "BEAUTY", color: "after:bg-myntra-beauty" },
+    { name: "GENZ", color: "after:bg-myntra-genz" },
+    { name: "STUDIO", color: "after:bg-myntra-studio" },
   ];
   return (
     <nav className="h-20 shadow-lg flex px-16 items-center fixed top-0 w-full left-0 z-50 bg-white">
@@ -60,7 +69,11 @@ const Navbar = () => {
             {item.name}
           </a>
         ))}
-        <Dropdown activeMenu={activeMenu} setActiveMenu={setActiveMenu} />
+        <Dropdown
+          activeMenu={activeMenu}
+          setActiveMenu={setActiveMenu}
+          headingColor={navColors[activeMenu]}
+        />
       </div>
 
       <div className="relative pl-5">
@@ -74,7 +87,7 @@ const Navbar = () => {
           placeholder="Search for products, brands and more"
           onFocus={() => setShowDropdown(true)}
           onBlur={() => setTimeout(() => setShowDropdown(false), 100)}
-          className="w-130 p-2 bg-gray-200"
+          className="w-130 p-2 outline-gray-100"
         />
         {query.length > 0 && suggestions.length > 0 && showDropdown && (
           <div className="absolute top-full left-0 w-full bg-white shadow-lg z-50 max-h-70 overflow-y-auto [&::-webkit-scrollbar]:hidden">

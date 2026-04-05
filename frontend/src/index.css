@@ -1,1 +1,11 @@
 @import "tailwindcss";
+
+@theme {
+  --color-myntra-women: #fb56c1;
+  --color-myntra-men: #ee5f73;
+  --color-myntra-kids: #f26a10;
+  --color-myntra-home: #f2c210;
+  --color-myntra-beauty: #0db7af;
+  --color-myntra-genz: #0db7af;
+  --color-myntra-studio: #ff3f6c;
+}

@@ -8,6 +8,9 @@ import { store } from "./redux/store.js";
 import { PersistGate } from "redux-persist/integration/react";
 import { persistor } from "./redux/store.js";
 
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+
 createRoot(document.getElementById("root")).render(
   <BrowserRouter>
     <Provider store={store}>

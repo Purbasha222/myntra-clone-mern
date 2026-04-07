@@ -87,7 +87,7 @@ const Navbar = () => {
           placeholder="Search for products, brands and more"
           onFocus={() => setShowDropdown(true)}
           onBlur={() => setTimeout(() => setShowDropdown(false), 100)}
-          className="w-130 p-2 outline-gray-100"
+          className="w-130 p-2 border border-gray-200 outline-none bg-gray-200 focus:bg-white rounded-md"
         />
         {query.length > 0 && suggestions.length > 0 && showDropdown && (
           <div className="absolute top-full left-0 w-full bg-white shadow-lg z-50 max-h-70 overflow-y-auto [&::-webkit-scrollbar]:hidden">

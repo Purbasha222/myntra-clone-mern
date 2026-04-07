@@ -1,16 +1,41 @@
-import heroVideo from "../assets/heroVideo.mp4";
+import banner1 from "../assets/banner1.webp";
+import banner2 from "../assets/banner2.webp";
+import banner3 from "../assets/banner3.webp";
+import banner4 from "../assets/banner4.webp";
+import banner5 from "../assets/banner5.webp";
+import banner6 from "../assets/banner6.webp";
+import banner7 from "../assets/banner7.webp";
+import Slider from "react-slick";
 
 const Hero = () => {
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 2000,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 3000,
+  };
+
+  const bannerImages = [
+    banner1,
+    banner2,
+    banner3,
+    banner4,
+    banner5,
+    banner6,
+    banner7,
+  ];
+
   return (
-    <div className="mt-15 w-full h-100 overflow-hidden">
-      <video
-        src={heroVideo}
-        autoPlay
-        loop
-        muted
-        className="w-full h-100 object-fit"
-      />
-    </div>
+    <Slider {...settings}>
+      {bannerImages.map((img, index) => (
+        <div key={index}>
+          <img src={img} alt="slide" className="w-full object-cover" />
+        </div>
+      ))}
+    </Slider>
   );
 };
 

@@ -9,3 +9,11 @@
   --color-myntra-genz: #0db7af;
   --color-myntra-studio: #ff3f6c;
 }
+
+.slick-slider {
+  overflow: hidden;
+}
+
+.slick-slide img {
+  display: block;
+}

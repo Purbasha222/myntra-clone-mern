@@ -1,11 +1,11 @@
 import Hero from "../components/Hero";
-// import Slider from "../components/Slider";
+import ShopSlider from "../components/ShopSlider";
 
 const Home = () => {
   return (
     <>
       <Hero />
-      {/* <Slider /> */}
+      <ShopSlider />
     </>
   );
 };

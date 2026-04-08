@@ -1,4 +1,3 @@
-import logo from "../assets/logo.png";
 import { HiOutlineShoppingBag } from "react-icons/hi2";
 import { GoPerson } from "react-icons/go";
 import { GoHeart } from "react-icons/go";
@@ -41,7 +40,8 @@ const Navbar = () => {
     <nav className="h-20 shadow-lg flex px-16 items-center fixed top-0 w-full left-0 z-50 bg-white">
       <div>
         <img
-          src={logo}
+          src="/logo.png"
+          alt="Myntra"
           className="h-20 cursor-pointer"
           onClick={() => navigate("/")}
         />

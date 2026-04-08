@@ -10,10 +10,17 @@
   --color-myntra-studio: #ff3f6c;
 }
 
-.slick-slider {
-  overflow: hidden;
+.slick-prev {
+  left: 15px !important;
+  z-index: 20 !important;
 }
 
-.slick-slide img {
-  display: block;
+.slick-next {
+  right: 15px !important;
+  color: black !important;
+}
+
+.slick-prev:before,
+.slick-next:before {
+  color: black !important;
 }

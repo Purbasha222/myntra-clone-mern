@@ -1,5 +1,4 @@
 import { useNavigate } from "react-router-dom";
-import logo from "../assets/logo.png";
 
 const CartNavbar = () => {
   const navigate = useNavigate();
@@ -7,7 +6,7 @@ const CartNavbar = () => {
     <nav className="h-20 shadow-lg flex px-16 items-center fixed top-0 w-full left-0 z-50 bg-white">
       <div>
         <img
-          src={logo}
+          src="/logo.png"
           className="h-20 cursor-pointer"
           onClick={() => navigate("/")}
         />

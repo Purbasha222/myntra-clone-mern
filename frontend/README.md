@@ -1,16 +1,121 @@
-# React + Vite
+# 🛍️ Myntra Clone — Full-Stack E-Commerce Platform
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A fully functional, production-deployed e-commerce web application inspired by Myntra, built with the **MERN stack**. Features complete user authentication with OTP verification, product browsing, cart & wishlist management, and a responsive UI.
 
-Currently, two official plugins are available:
+🔗 **Live Demo:** [myntr-fullstack-ecommerce.netlify.app](https://myntr-fullstack-ecommerce.netlify.app)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## React Compiler
+## ✨ Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### 🔐 Authentication
 
-## Expanding the ESLint configuration
+- OTP-based email verification (no password required)
+- JWT-based session management with secure token storage
+- Protected routes — unauthorized users are redirected automatically
+- OTP expiry validation with a countdown timer and resend option
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### 🛒 Shopping Experience
+
+- Browse products with category and filter support
+- Add / remove items from **Cart** with quantity control
+- Add / remove items from **Wishlist**
+- Cart total calculation with live quantity updates
+
+### 🎨 UI / UX
+
+- Responsive design across mobile, tablet, and desktop
+- Two-panel auth layout — sticky branded panel + scrollable form
+- Sticky navigation bars (cart navbar, breadcrumb trail)
+- Clean, Myntra-inspired pink & white design language
+
+### ⚙️ State Management
+
+- Redux Toolkit for global state (auth, cart, wishlist, products)
+- redux-persist for cart and wishlist persistence across sessions
+- Smart state design: products are NOT persisted (fetched fresh), cart/wishlist are whitelisted
+
+---
+
+## 🛠️ Tech Stack
+
+### Frontend
+
+| Technology       | Purpose                                |
+| ---------------- | -------------------------------------- |
+| React.js         | Component-based UI                     |
+| React Router DOM | Client-side routing & protected routes |
+| Redux Toolkit    | Global state management                |
+| redux-persist    | Persistent cart & wishlist             |
+| Tailwind CSS     | Utility-first responsive styling       |
+
+### Backend
+
+| Technology           | Purpose                 |
+| -------------------- | ----------------------- |
+| Node.js              | Runtime environment     |
+| Express.js           | REST API framework      |
+| MongoDB              | NoSQL database          |
+| Mongoose             | ODM for schema modeling |
+| JSON Web Token (JWT) | Stateless auth tokens   |
+| Resend + Gmail SMTP  | OTP email delivery      |
+
+### Deployment
+
+| Platform          | Scope                                      |
+| ----------------- | ------------------------------------------ |
+| **Netlify**       | Frontend hosting with SPA redirect support |
+| **Render**        | Backend Node.js server (free tier)         |
+| **MongoDB Atlas** | Cloud-hosted database                      |
+
+---
+
+## 📡 API Endpoints
+
+### Auth
+
+| Method | Endpoint               | Description             |
+| ------ | ---------------------- | ----------------------- |
+| `POST` | `/api/auth/send-otp`   | Send OTP to email       |
+| `POST` | `/api/auth/verify-otp` | Verify OTP & return JWT |
+
+### Cart
+
+| Method   | Endpoint                      | Description           |
+| -------- | ----------------------------- | --------------------- |
+| `GET`    | `/api/cart`                   | Get user's cart       |
+| `POST`   | `/api/cart/add`               | Add item to cart      |
+| `PUT`    | `/api/cart/update`            | Update item quantity  |
+| `DELETE` | `/api/cart/remove/:productId` | Remove item from cart |
+
+### Wishlist
+
+| Method   | Endpoint                          | Description               |
+| -------- | --------------------------------- | ------------------------- |
+| `GET`    | `/api/wishlist`                   | Get user's wishlist       |
+| `POST`   | `/api/wishlist/add`               | Add item to wishlist      |
+| `DELETE` | `/api/wishlist/remove/:productId` | Remove item from wishlist |
+
+---
+
+## 🧠 Key Technical Decisions
+
+- **Cart & Wishlist stored in User model** — embedded arrays for atomic updates and simpler queries, avoiding separate collections for a project at this scale.
+- **Products NOT persisted in Redux** — products are fetched fresh on load; only cart and wishlist IDs are persisted, keeping the store lightweight and data consistent.
+- **OTP via Resend over Nodemailer** — eliminates trial account restrictions; Gmail SMTP with App Passwords is free and reliable for development and demo purposes.
+- **Netlify `_redirects` for SPA** — added `/* /index.html 200` to prevent 404 errors on page refresh for client-side routes.
+- **SMTP Port 587 (STARTTLS)** — chosen over port 465 to comply with Render's free-tier firewall restrictions on outbound connections.
+
+## 🙋‍♀️ Author
+
+**Purbasha**
+Final-year BCA Student | MERN Stack Developer
+
+[![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/Purbasha222)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/in/purbasha-goswami)
+
+---
+
+## 📄 License
+
+This project is built for educational and portfolio purposes. The UI is inspired by Myntra — all product data is sample/mock data.

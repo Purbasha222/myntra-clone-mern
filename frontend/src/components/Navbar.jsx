@@ -4,10 +4,14 @@ import { GoHeart } from "react-icons/go";
 import Dropdown from "./Dropdown";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import ProfileDropdown from "./ProfileDropdown";
+import { logout } from "../redux/SLice/authSlice";
 
 const Navbar = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { email } = useSelector((state) => state.auth);
   const [query, setQuery] = useState("");
   const products = useSelector((state) => state.product.products);
   const suggestions = products
@@ -105,9 +109,21 @@ const Navbar = () => {
         )}
       </div>
       <div className="flex gap-7 items-center pl-16">
-        <div className="cursor-pointer" onClick={() => navigate("/profile")}>
-          <GoPerson fontSize={20} />
-          <span className="text-sm font-semibold ">Profile</span>
+        <div
+          className="relative cursor-pointer"
+          onMouseEnter={() => setActiveMenu("PROFILE")}
+          onMouseLeave={() => setActiveMenu(null)}
+        >
+          <div>
+            <GoPerson fontSize={20} />
+            <span className="text-sm font-semibold ">Profile</span>
+          </div>
+          {activeMenu === "PROFILE" && (
+            <ProfileDropdown
+              email={email}
+              onLogout={() => dispatch(logout())}
+            />
+          )}
         </div>
 
         <div className="cursor-pointer" onClick={() => navigate("/wishlist")}>

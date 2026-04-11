@@ -3,6 +3,7 @@ import ProductCard from "../components/ProductCard";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import { fetchProducts } from "../redux/SLice/productSlice";
+import Filter from "../components/Filter";
 
 const Products = () => {
   const { category } = useParams();
@@ -19,10 +20,13 @@ const Products = () => {
   console.log(filtered);
 
   return (
-    <div className="grid grid-cols-5 p-20 gap-y-8">
-      {filtered.map((item, index) => (
-        <ProductCard item={item} key={index} />
-      ))}
+    <div className="flex">
+      <Filter />
+      <div className="grid grid-cols-5 p-10 gap-y-8 gap-10">
+        {filtered.map((item, index) => (
+          <ProductCard item={item} key={index} />
+        ))}
+      </div>
     </div>
   );
 };

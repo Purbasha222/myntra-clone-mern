@@ -12,7 +12,7 @@ const ProductDetails = () => {
   const dispatch = useDispatch();
   const products = useSelector((state) => state.product.products);
   const cartItems = useSelector((state) => state.cart.cartItems);
-  const alreadyInCart = cartItems.find((item) => item.productId === Number(id));
+  const alreadyInCart = cartItems.find((item) => item.id === Number(id));
 
   useEffect(() => {
     dispatch(fetchProducts());

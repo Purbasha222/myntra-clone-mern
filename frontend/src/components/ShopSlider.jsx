@@ -11,6 +11,7 @@ import banner15 from "../assets/banner15.webp";
 import banner16 from "../assets/banner16.webp";
 import banner17 from "../assets/banner17.webp";
 import banner18 from "../assets/banner18.webp";
+import banner19 from "../assets/banner19.webp";
 import Slider from "react-slick";
 
 const ShopSlider = () => {
@@ -59,6 +60,7 @@ const ShopSlider = () => {
           ))}
         </Slider>
       </div>
+      <img src={banner19} alt="" />
     </>
   );
 };

@@ -11,9 +11,7 @@ const WishlistCard = ({ item, index }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart.cartItems);
-  const alreadyInCart = cartItems.find(
-    (cartItem) => cartItem.productId === item.id,
-  );
+  const alreadyInCart = cartItems.find((cartItem) => cartItem.id === item.id);
 
   return (
     <div

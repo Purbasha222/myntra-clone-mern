@@ -1,10 +1,12 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { removeFromCart } from "../redux/SLice/cartSlice";
+import { handleCheckBox } from "../redux/SLice/cartSlice";
 import { useNavigate } from "react-router-dom";
 import { HiOutlineShoppingBag } from "react-icons/hi2";
 import toast from "react-hot-toast";
 
-const CartCard = ({ item, index, handleCheckBox, selectedItems }) => {
+const CartCard = ({ item, index }) => {
+  const selectedItems = useSelector((state) => state.cart.selectedItems ?? []);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   return (
@@ -19,7 +21,7 @@ const CartCard = ({ item, index, handleCheckBox, selectedItems }) => {
         checked={selectedItems.includes(item.id)}
         onClick={(e) => {
           e.stopPropagation();
-          handleCheckBox(item.id);
+          dispatch(handleCheckBox({ id: item.id }));
         }}
       />
       <img src={item.thumbnail} alt="" className="h-60 w-80" />

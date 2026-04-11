@@ -17,7 +17,7 @@ export const sendOtp = async (req, res) => {
       OTP += digits[Math.floor(Math.random() * 10)];
     }
 
-    const otpExpiresAt = new Date(Date.now() + 60 * 1000);
+    const otpExpiresAt = new Date(Date.now() + 10 * 60 * 1000);
 
     await User.findOneAndUpdate(
       { email },

@@ -439,7 +439,7 @@ const Dropdown = ({ activeMenu, setActiveMenu, headingColor }) => {
 
   return (
     <div
-      className="absolute top-full left-40 w-275 bg-white shadow-lg z-40 px-8 py-4"
+      className="absolute top-full left-40 w-275 bg-white shadow-lg z-40 px-8 py-4 border"
       onMouseLeave={() => setActiveMenu(null)}
     >
       <div

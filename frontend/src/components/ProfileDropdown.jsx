@@ -3,10 +3,7 @@ import { useNavigate } from "react-router-dom";
 const ProfileDropdown = ({ email, onLogout }) => {
   const navigate = useNavigate();
   return (
-    <div
-      className="absolute top-full -right-30 w-64 bg-white shadow-lg z-40 py-2"
-      onMouseLeave={() => {}}
-    >
+    <div className="absolute top-15 -right-30 w-64 bg-white shadow-lg z-40 py-2">
       <div className="px-4 py-3 border-b border-gray-100">
         <p className="text-sm text-gray-500">Hello,</p>
         <p className="text-sm font-semibold truncate">{email}</p>

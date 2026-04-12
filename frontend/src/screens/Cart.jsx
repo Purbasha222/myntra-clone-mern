@@ -21,15 +21,15 @@ const Cart = () => {
     .reduce((acc, item) => acc + item.price, 0);
 
   return (
-    <>
+    <div className="p-20">
       {cartItems.length > 0 ? (
-        <div className="grid grid-cols-2 gap-10 justify-center p-20">
+        <div className="grid grid-cols-2 gap-10 justify-center px-30">
           <div className="flex flex-col gap-y-3">
             {cartItems.map((item, index) => (
               <CartCard item={item} key={index} />
             ))}
           </div>
-          <div className="border-l border-gray-300 p-10">
+          <div className="border-l border-gray-300 p-10 border">
             <h2 className="font-bold text-gray-500 mb-5">COUPONS</h2>
             <div className="flex justify-between items-center mb-10">
               <p className="flex gap-5 items-center font-semibold">
@@ -86,7 +86,7 @@ const Cart = () => {
                   Privacy Policy
                 </span>
               </p>
-              <button className="border w-full p-2 text-white text-lg font-semibold bg-myntra-studio">
+              <button className="border w-full p-2 text-white text-lg font-semibold bg-myntra-studio cursor-pointer">
                 PLACE ORDER
               </button>
             </div>
@@ -95,7 +95,7 @@ const Cart = () => {
       ) : (
         <p>Cart is empty</p>
       )}
-    </>
+    </div>
   );
 };
 

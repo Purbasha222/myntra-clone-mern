@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { GoHeart } from "react-icons/go";
+import { GoHeartFill } from "react-icons/go";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { addToWishlist } from "../redux/SLice/wishlistSlice";
@@ -11,7 +12,7 @@ const ProductCard = ({ item, index }) => {
   const dispatch = useDispatch();
   const wishlistItems = useSelector((state) => state.wishlist.wishlistItems);
   const alreadyInWishlist = wishlistItems.find(
-    (wishlistItem) => wishlistItem.productId === item.id,
+    (wishlistItem) => wishlistItem.id === item.id,
   );
 
   return (
@@ -27,6 +28,14 @@ const ProductCard = ({ item, index }) => {
         alt={item.title}
         className="h-80 w-50 bg-gray-50"
       />
+
+      {alreadyInWishlist && (
+        <GoHeartFill
+          className="absolute top-2 right-2 text-red-500"
+          fontSize={20}
+        />
+      )}
+
       <div className="text-start p-3">
         {isHovering && (
           <div className="flex justify-center items-center">
@@ -42,7 +51,12 @@ const ProductCard = ({ item, index }) => {
                 }
               }}
             >
-              <GoHeart fontSize={20} /> WISHLIST
+              {alreadyInWishlist ? (
+                <GoHeartFill fontSize={20} />
+              ) : (
+                <GoHeart fontSize={20} />
+              )}{" "}
+              WISHLIST
             </button>
           </div>
         )}

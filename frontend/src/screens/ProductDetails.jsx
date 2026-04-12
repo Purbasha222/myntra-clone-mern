@@ -5,13 +5,19 @@ import { fetchProducts } from "../redux/SLice/productSlice";
 import { addToCart } from "../redux/SLice/cartSlice";
 import { HiOutlineShoppingBag } from "react-icons/hi2";
 import { GoHeart } from "react-icons/go";
+import { GoHeartFill } from "react-icons/go";
 import toast from "react-hot-toast";
+import { addToWishlist } from "../redux/SLice/wishlistSlice";
 
 const ProductDetails = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const products = useSelector((state) => state.product.products);
   const cartItems = useSelector((state) => state.cart.cartItems);
+  const wishlistItems = useSelector((state) => state.wishlist.wishlistItems);
+  const alreadyInWishlist = wishlistItems.find(
+    (item) => item.id === Number(id),
+  );
   const alreadyInCart = cartItems.find((item) => item.id === Number(id));
 
   useEffect(() => {
@@ -42,7 +48,25 @@ const ProductDetails = () => {
       </div>
 
       <div className="flex flex-col gap-2">
-        <p className="text-lg font-bold text-gray-800">{item.brand}</p>
+        <div className="flex justify-between">
+          <p className="text-lg font-bold text-gray-800">{item.brand}</p>
+          {alreadyInWishlist ? (
+            <GoHeartFill
+              className="cursor-pointer"
+              onClick={() => {
+                if (alreadyInWishlist) toast.error("Already in wishlist!");
+              }}
+            />
+          ) : (
+            <GoHeart
+              className="cursor-pointer"
+              onClick={() => {
+                toast.success("Product added to wishlist!");
+                dispatch(addToWishlist(item));
+              }}
+            />
+          )}
+        </div>
         <span className="text-gray-600">{item.title}</span>
         <p className="text-sm text-gray-500">{item.description}</p>
         <p className="text-yellow-500 font-medium">⭐ {item.rating}</p>

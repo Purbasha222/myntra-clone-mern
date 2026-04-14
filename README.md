@@ -26,7 +26,7 @@ A fully functional, production-deployed e-commerce web application inspired by M
 
 - Responsive design across mobile, tablet, and desktop
 - Two-panel auth layout — sticky branded panel + scrollable form
-- Sticky navigation bars (cart navbar, breadcrumb trail)
+- Fixed navigation bars
 - Clean, Myntra-inspired pink & white design language
 
 ### ⚙️ State Management
@@ -51,14 +51,13 @@ A fully functional, production-deployed e-commerce web application inspired by M
 
 ### Backend
 
-| Technology           | Purpose                 |
-| -------------------- | ----------------------- |
-| Node.js              | Runtime environment     |
-| Express.js           | REST API framework      |
-| MongoDB              | NoSQL database          |
-| Mongoose             | ODM for schema modeling |
-| JSON Web Token (JWT) | Stateless auth tokens   |
-| Resend + Gmail SMTP  | OTP email delivery      |
+| Technology           | Purpose               |
+| -------------------- | --------------------- |
+| Node.js              | Runtime environment   |
+| Express.js           | REST API framework    |
+| MongoDB              | NoSQL database        |
+| JSON Web Token (JWT) | Stateless auth tokens |
+| Nodemailer           | OTP email delivery    |
 
 ### Deployment
 
@@ -102,14 +101,13 @@ A fully functional, production-deployed e-commerce web application inspired by M
 
 - **Cart & Wishlist stored in User model** — embedded arrays for atomic updates and simpler queries, avoiding separate collections for a project at this scale.
 - **Products NOT persisted in Redux** — products are fetched fresh on load; only cart and wishlist IDs are persisted, keeping the store lightweight and data consistent.
-- **OTP via Resend over Nodemailer** — eliminates trial account restrictions; Gmail SMTP with App Passwords is free and reliable for development and demo purposes.
+- **OTP via Nodemailer** — eliminates trial account restrictions; Gmail SMTP is free and reliable for development and demo purposes.
 - **Netlify `_redirects` for SPA** — added `/* /index.html 200` to prevent 404 errors on page refresh for client-side routes.
-- **SMTP Port 587 (STARTTLS)** — chosen over port 465 to comply with Render's free-tier firewall restrictions on outbound connections.
 
 ## 🙋‍♀️ Author
 
 **Purbasha**
-Final-year BCA Student | MERN Stack Developer
+3rd Year BCA Student | MERN Stack Developer
 
 [![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/Purbasha222)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/in/purbasha-goswami)

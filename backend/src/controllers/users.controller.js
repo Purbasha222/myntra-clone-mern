@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken";
 import User from "../models/user.model.js";
-import { resend } from "../../utils/mailer.js";
+import { sendOTPEmail } from "../../utils/mailer.js";
 
 export const sendOtp = async (req, res) => {
   try {
@@ -17,7 +17,7 @@ export const sendOtp = async (req, res) => {
       OTP += digits[Math.floor(Math.random() * 10)];
     }
 
-    const otpExpiresAt = new Date(Date.now() + 10 * 60 * 1000);
+    const otpExpiresAt = new Date(Date.now() + 60 * 1000);
 
     await User.findOneAndUpdate(
       { email },
@@ -25,12 +25,7 @@ export const sendOtp = async (req, res) => {
       { upsert: true, new: true },
     );
 
-    await resend.emails.send({
-      from: "onboarding@resend.dev",
-      to: email,
-      subject: "Your OTP Code",
-      html: `<h2>Your OTP is <b>${OTP}</b>.</h2><p>Valid for 10 minutes.</p>`,
-    });
+    await sendOTPEmail(email, OTP);
     return res.status(200).json({ message: "OTP sent successfully" });
   } catch (error) {
     return res.status(500).json({ message: error.message });

@@ -15,15 +15,12 @@ const OTPInput = ({ length = 4, onOtpSubmit = () => {} }) => {
     if (isNaN(value)) return;
     const newOtp = [...otp];
 
-    // allow only one input
     newOtp[index] = value.substring(value.length - 1);
     setOtp(newOtp);
 
-    // submit trigger
     const combinedOtp = newOtp.join("");
     if (combinedOtp.length === length) onOtpSubmit(combinedOtp);
 
-    // move to next input field
     if (value && index < length - 1 && inputRefs.current[index + 1]) {
       inputRefs.current[index + 1].focus();
     }

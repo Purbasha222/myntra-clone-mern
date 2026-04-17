@@ -71,7 +71,7 @@ const CartCard = ({ item, index }) => {
           </button>
         </div>
         <p className="text-xl font-semibold text-gray-900 mt-2">
-          ₹{item.price * item.quantity}
+          ₹{(item.price * item.quantity).toFixed(2)}
         </p>
         <div className="flex gap-3">
           {/* <button

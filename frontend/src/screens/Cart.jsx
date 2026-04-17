@@ -2,6 +2,8 @@ import { useDispatch, useSelector } from "react-redux";
 import CartCard from "../components/CartCard";
 import { useEffect, useState } from "react";
 import { LuTag } from "react-icons/lu";
+import EmptyCart from "../assets/shopping-bags-heart.jpg";
+import { useNavigate } from "react-router-dom";
 
 // import { fetchCart } from "../redux/SLice/cartSlice";
 
@@ -9,6 +11,7 @@ const Cart = () => {
   // const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart.cartItems);
   const selectedItems = useSelector((state) => state.cart.selectedItems ?? []);
+  const navigate = useNavigate();
 
   // useEffect(() => {
   //   dispatch(fetchCart());
@@ -18,7 +21,7 @@ const Cart = () => {
 
   const totalPrice = cartItems
     .filter((item) => selectedItems.includes(item.id))
-    .reduce((acc, item) => acc + item.price, 0);
+    .reduce((acc, item) => acc + item.price * item.quantity, 0);
 
   return (
     <div className="p-20">
@@ -29,7 +32,7 @@ const Cart = () => {
               <CartCard item={item} key={index} />
             ))}
           </div>
-          <div className="border-l border-gray-300 p-10 border">
+          <div className="border-l border-gray-300 px-3">
             <h2 className="font-bold text-gray-500 mb-5">COUPONS</h2>
             <div className="flex justify-between items-center mb-10">
               <p className="flex gap-5 items-center font-semibold">
@@ -93,7 +96,23 @@ const Cart = () => {
           </div>
         </div>
       ) : (
-        <p>Cart is empty</p>
+        <div className="flex flex-col justify-center items-center">
+          <img src={EmptyCart} alt="" height={300} width={300} />
+          <p className="text-gray-500 font-semibold text-2xl mt-2">
+            Hey, it feels so light
+          </p>
+          <p className="text-gray-500 mt-2">
+            There is nothing in your bag. Let's add some items.
+          </p>
+          <button
+            onClick={() => navigate("/wishlist")}
+            className="p-2 border border-myntra-studio mt-2 cursor-pointer"
+          >
+            <p className="font-semibold text-lg text-myntra-studio">
+              ADD ITEMS FROM WISHLIST
+            </p>
+          </button>
+        </div>
       )}
     </div>
   );

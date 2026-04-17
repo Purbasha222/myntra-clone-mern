@@ -10,7 +10,7 @@ const OTPForm = () => {
   const [email, setEmail] = useState("");
   const [showOtpInput, setShowOtpInput] = useState(false);
   const [isSending, setIsSending] = useState(false);
-  const [timeLeft, setTimeLeft] = useState(60);
+  const [timeLeft, setTimeLeft] = useState(600);
   const [otpSentCount, setOtpSentCount] = useState(0);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -64,7 +64,7 @@ const OTPForm = () => {
 
       if (res.ok) {
         setShowOtpInput(true);
-        setTimeLeft(60);
+        setTimeLeft(600);
         setOtpSentCount((prev) => prev + 1);
         setIsSending(false);
       } else {

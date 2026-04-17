@@ -80,7 +80,7 @@ const ProductDetails = () => {
                 toast.error("Already in cart!");
               } else {
                 toast.success("Product added to cart!");
-                dispatch(addToCart(item));
+                dispatch(addToCart({ ...item, quantity: 1 }));
               }
             }}
             className="flex items-center border cursor-pointer p-2"

@@ -1,6 +1,6 @@
 const Footer = () => {
   return (
-    <div className="flex flex-wrap gap-10 bg-gray-100 w-full px-10 md:px-20 lg:px-40 py-10 mt-5">
+    <div className="flex flex-wrap gap-10 bg-gray-100 w-full px-10 md:px-20 lg:px-40 py-10">
       <div className="flex flex-col gap-1 min-w-[150px]">
         <p className="font-bold text-xs mb-4 tracking-wider">ONLINE SHOPPING</p>
         <ul className="flex flex-col gap-1 text-sm text-gray-600">

@@ -4,8 +4,8 @@ const Sort = () => {
   return (
     <div>
       <select name="Sort" id="">
-        <option>
-          Sort By: <bold className="font-bold">Recommended</bold>
+        <option value="Recommended">
+          Sort By: <p className="font-bold">Recommended</p>
         </option>
         <option value="Recommended">Recommended</option>
         <option value="What's New">What's New</option>

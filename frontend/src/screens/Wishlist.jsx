@@ -15,10 +15,11 @@ const Wishlist = () => {
   //   dispatch(fetchWishlist());
   // }, [dispatch]);
 
+
   return (
     <>
       {wishlistItems.length > 0 ? (
-        <div className="flex flex-col gap-y-5 p-20">
+        <div className="grid grid-cols-5 p-10 gap-y-8 gap-7">
           {wishlistItems.map((item, index) => (
             <WishlistCard item={item} key={index} />
           ))}

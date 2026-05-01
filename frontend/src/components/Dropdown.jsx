@@ -439,7 +439,7 @@ const Dropdown = ({ activeMenu, setActiveMenu, headingColor }) => {
 
   return (
     <div
-      className="absolute top-full left-40 w-275 bg-white shadow-lg z-40 px-8 py-4 border"
+      className="absolute top-full left-40 w-275 bg-white shadow-lg z-40 px-8 py-4"
       onMouseLeave={() => setActiveMenu(null)}
     >
       <div
@@ -463,7 +463,7 @@ const Dropdown = ({ activeMenu, setActiveMenu, headingColor }) => {
                 {currentMenu[category].map((item, index) => (
                   <li
                     key={`${item}-${index}`}
-                    className="text-sm text-gray-700 hover:text-[#ff3f6c] cursor-pointer"
+                    className="text-sm text-gray-700 hover:text-myntra-studio cursor-pointer"
                   >
                     {item}
                   </li>

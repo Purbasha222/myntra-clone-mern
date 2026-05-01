@@ -18,7 +18,7 @@ const ProductCard = ({ item, index }) => {
   return (
     <div
       key={`${index}`}
-      className="flex flex-col h-80 w-50 shadow-lg cursor-pointer"
+      className="flex flex-col w-55 shadow-lg cursor-pointer relative"
       onMouseEnter={() => setIsHovering(true)}
       onMouseLeave={() => setIsHovering(false)}
       onClick={() => navigate(`/products/${item.id}`)}
@@ -26,42 +26,44 @@ const ProductCard = ({ item, index }) => {
       <img
         src={item.thumbnail}
         alt={item.title}
-        className="h-80 w-50 bg-gray-50"
+        className="h-60 object-cover bg-gray-50"
       />
 
-      {alreadyInWishlist && (
+      {/* {(isHovering || alreadyInWishlist) && (
         <GoHeartFill
           className="absolute top-2 right-2 text-red-500"
           fontSize={20}
         />
+      )} */}
+
+      {isHovering && (
+        // <div className="flex justify-center items-center relative bg-white mb-3">
+        <button
+          className="absolute bottom-[75px] left-0 right-0 flex justify-center items-center gap-2 bg-white border border-gray-300 py-1 font-bold cursor-pointer z-10"
+          onClick={(e) => {
+            e.stopPropagation();
+            if (alreadyInWishlist) {
+              toast.error("Already in wishlist!");
+            } else {
+              toast.success("Product added to wishlist");
+              dispatch(addToWishlist(item));
+            }
+          }}
+        >
+          {alreadyInWishlist ? (
+            <GoHeartFill fontSize={20} color="red" />
+          ) : (
+            <GoHeart fontSize={20} />
+          )}{" "}
+          WISHLIST
+        </button>
+        // </div>
       )}
 
-      <div className="text-start p-3">
-        {isHovering && (
-          <div className="flex justify-center items-center">
-            <button
-              className="flex justify-center items-center border border-gray-300 px-12 gap-2 font-bold cursor-pointer"
-              onClick={(e) => {
-                e.stopPropagation();
-                if (alreadyInWishlist) {
-                  toast.error("Already in wishlist!");
-                } else {
-                  toast.success("Product added to wishlist");
-                  dispatch(addToWishlist(item));
-                }
-              }}
-            >
-              {alreadyInWishlist ? (
-                <GoHeartFill fontSize={20} />
-              ) : (
-                <GoHeart fontSize={20} />
-              )}{" "}
-              WISHLIST
-            </button>
-          </div>
-        )}
+      <div className="text-start px-3">
         <span className="font-bold">{item.brand}</span>
-        <p className="text-gray-500">{item.title}</p>
+        <p className="text-gray-500 truncate">{item.title}</p>
+        <p className="font-bold text-lg">₹{item.price}</p>
       </div>
     </div>
   );

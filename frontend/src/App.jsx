@@ -15,6 +15,7 @@ import SearchResults from "./components/SearchResults";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { fetchProducts } from "./redux/SLice/productSlice";
+import Profile from "./screens/Profile";
 
 function App() {
   const dispatch = useDispatch();
@@ -80,6 +81,14 @@ function App() {
           element={
             <ProtectedRoute>
               <Cart />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/profile"
+          element={
+            <ProtectedRoute>
+              <Profile />
             </ProtectedRoute>
           }
         />

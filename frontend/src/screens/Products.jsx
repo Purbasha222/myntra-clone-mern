@@ -23,8 +23,8 @@ const Products = () => {
   return (
     <div className="flex justify-between">
       <Filter />
-      <Sort />
-      <div className="grid grid-cols-5 p-10 gap-y-8 gap-10">
+      {/* <Sort /> */}
+      <div className="grid grid-cols-5 p-10 gap-y-8 gap-7">
         {filtered.map((item, index) => (
           <ProductCard item={item} key={index} />
         ))}

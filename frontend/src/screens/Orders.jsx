@@ -17,10 +17,12 @@ const Orders = () => {
       <div className="max-w-275 mx-auto px-4 py-8 pb-16 flex gap-7 items-start">
         {/* <div className="grid grid-cols-[1fr_3fr] gap-10 px-20 py-10"> */}
         {/* LEFT SIDEBAR */}
-        <ProfileSidebar />
+        <div className="sticky top-0 shrink-0">
+          <ProfileSidebar />
+        </div>
 
         {/* RIGHT - Orders */}
-        <div>
+        <div className="flex-1 overflow-y-auto max-h-screen no-scrollbar">
           <p className="text-xl font-bold">All orders</p>
           <p className="text-gray-400 text-sm mb-5">from anytime</p>
 

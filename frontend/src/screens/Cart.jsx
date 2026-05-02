@@ -28,7 +28,7 @@ const Cart = () => {
     <div className="p-20">
       {cartItems.length > 0 ? (
         <div className="grid grid-cols-2 gap-10 justify-center px-30">
-          <div className="flex flex-col gap-y-3">
+          <div className="flex flex-col gap-y-3 flex-1 overflow-y-auto max-h-screen no-scrollbar">
             {cartItems.map((item, index) => (
               <CartCard item={item} key={index} />
             ))}
@@ -40,7 +40,7 @@ const Cart = () => {
               <p className="font-semibold">Add More From Wishlist</p>
             </div>
           </div>
-          <div className="border-l border-gray-300 px-3">
+          <div className="border-l border-gray-300 px-3 sticky top-0 shrink-0">
             <h2 className="font-bold text-gray-500 mb-5">COUPONS</h2>
             <div className="flex justify-between items-center mb-10">
               <p className="flex gap-5 items-center font-semibold">

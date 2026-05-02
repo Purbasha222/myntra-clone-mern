@@ -1,19 +1,5 @@
 import { useSelector } from "react-redux";
-
-const sidebarLinks = {
-  ORDERS: ["Orders & Returns"],
-  CREDITS: ["Coupons", "Myntra Credit", "MynCash"],
-  ACCOUNT: [
-    "Profile",
-    "Saved Cards",
-    "Saved UPI",
-    "Saved Wallets/BNPL",
-    "Addresses",
-    "Myntra Insider",
-    "Delete Account",
-  ],
-  LEGAL: ["Terms of Use", "Privacy Center"],
-};
+import ProfileSidebar from "../components/ProfileSidebar";
 
 const gridCards = [
   {
@@ -137,34 +123,7 @@ export default function Profile() {
     <div className="p-15">
       <div className="max-w-275 mx-auto px-4 py-8 pb-16 flex gap-7 items-start">
         {/* ── SIDEBAR ── */}
-        <aside className="w-55 shrink-0">
-          <div>
-            <h2 className="text-[18px] font-bold text-[#282c3f]">Account</h2>
-            <p className="text-[13px] text-[#535665] mt-0.5">{user}</p>
-          </div>
-
-          {Object.entries(sidebarLinks).map(([section, links]) => (
-            <div key={section}>
-              <div className="h-px bg-[#eaeaec] my-3.5" />
-              <p className="text-[11px] font-bold text-[#94969f] tracking-widest uppercase mb-1.5">
-                {section}
-              </p>
-              {links.map((link) => (
-                <span
-                  key={link}
-                  className={`block text-sm py-1.5 cursor-pointer transition-colors duration-150
-                    ${
-                      link === "Profile"
-                        ? "text-myntra-studio font-semibold"
-                        : "text-[#282c3f] hover:text-myntra-studio"
-                    }`}
-                >
-                  {link}
-                </span>
-              ))}
-            </div>
-          ))}
-        </aside>
+        <ProfileSidebar />
 
         {/* ── MAIN CONTENT ── */}
         <main className="flex-1 flex flex-col gap-4">
@@ -180,7 +139,7 @@ export default function Profile() {
               <span className="text-[15px] text-[#282c3f]">{user}</span>
             </div>
 
-            <button className="border border-[#282c3f] text-[#282c3f] text-[13px] font-bold tracking-widest uppercase px-5 py-2.5 transition-colors duration-150 hover:bg-[#282c3f] hover:text-white">
+            <button className="border border-[#282c3f] text-[#282c3f] text-[13px] font-bold tracking-widest uppercase px-5 py-2.5 transition-colors duration-150 hover:bg-[#282c3f] hover:text-white cursor-pointer">
               EDIT PROFILE
             </button>
           </div>

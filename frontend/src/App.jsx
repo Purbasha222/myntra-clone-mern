@@ -16,11 +16,16 @@ import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { fetchProducts } from "./redux/SLice/productSlice";
 import Profile from "./screens/Profile";
+import Address from "./screens/Address";
+import Payment from "./screens/Payment";
+import Orders from "./screens/Orders";
 
 function App() {
   const dispatch = useDispatch();
   const location = useLocation();
   const isCartPage = location.pathname === "/bag";
+  const isAdressPage = location.pathname === "/address";
+  const isPaymentPage = location.pathname === "/payment";
 
   useEffect(() => {
     dispatch(fetchProducts());
@@ -31,7 +36,11 @@ function App() {
       className={`${location.pathname !== "/login" ? "pt-20" : ""} min-h-screen flex flex-col mt-auto`}
     >
       {location.pathname !== "/login" &&
-        (isCartPage ? <CartNavbar /> : <Navbar />)}
+        (isCartPage || isAdressPage || isPaymentPage ? (
+          <CartNavbar />
+        ) : (
+          <Navbar />
+        ))}
       <Toaster position="top-center" />
       <Routes>
         <Route path="/login" element={<Login />} />
@@ -85,10 +94,34 @@ function App() {
           }
         />
         <Route
+          path="/address"
+          element={
+            <ProtectedRoute>
+              <Address />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/payment"
+          element={
+            <ProtectedRoute>
+              <Payment />
+            </ProtectedRoute>
+          }
+        />
+        <Route
           path="/profile"
           element={
             <ProtectedRoute>
               <Profile />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/orders"
+          element={
+            <ProtectedRoute>
+              <Orders />
             </ProtectedRoute>
           }
         />

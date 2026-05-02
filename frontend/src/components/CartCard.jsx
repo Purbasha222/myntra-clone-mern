@@ -11,7 +11,10 @@ const CartCard = ({ item, index }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   return (
-    <div key={index} className="relative flex gap-3 p-2 border border-gray-300">
+    <div
+      key={index}
+      className="relative flex gap-3 p-2 border border-gray-300 rounded-sm"
+    >
       <input
         type="checkbox"
         className="cursor-pointer"

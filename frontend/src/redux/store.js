@@ -6,11 +6,12 @@ import storage from "redux-persist/lib/storage";
 import { combineReducers } from "@reduxjs/toolkit";
 import cartSlice from "./SLice/cartSlice";
 import wishlistSlice from "./SLice/wishlistSlice";
+import orderSlice from "./SLice/orderSlice";
 
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: ["auth", "cart", "wishlist"],
+  whitelist: ["auth", "cart", "wishlist", "order"],
 };
 
 const rootReducer = combineReducers({
@@ -18,6 +19,7 @@ const rootReducer = combineReducers({
   auth: authSlice,
   cart: cartSlice.reducer,
   wishlist: wishlistSlice.reducer,
+  order: orderSlice.reducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

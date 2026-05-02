@@ -13,10 +13,10 @@ const WishlistCard = ({ item, index }) => {
   const cartItems = useSelector((state) => state.cart.cartItems);
   const alreadyInCart = cartItems.find((cartItem) => cartItem.id === item.id);
 
-  
+  // border flex flex-col w-55 shadow-lg cursor-pointer relative
   return (
     <div
-      className=" border flex flex-col w-55 shadow-lg cursor-pointer relative"
+      className="  border flex flex-col w-full shadow-lg cursor-pointer relative"
       key={index}
       onClick={() => navigate(`/products/${item.id}`)}
     >

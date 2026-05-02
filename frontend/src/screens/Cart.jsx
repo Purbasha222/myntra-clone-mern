@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { LuTag } from "react-icons/lu";
 import EmptyCart from "../assets/shopping-bags-heart.jpg";
 import { useNavigate } from "react-router-dom";
+import { FaRegBookmark } from "react-icons/fa";
 
 // import { fetchCart } from "../redux/SLice/cartSlice";
 
@@ -31,6 +32,13 @@ const Cart = () => {
             {cartItems.map((item, index) => (
               <CartCard item={item} key={index} />
             ))}
+            <div
+              className="flex gap-2 mt-3 items-center border border-gray-300 rounded-md py-5 px-2 cursor-pointer"
+              onClick={() => navigate("/wishlist")}
+            >
+              <FaRegBookmark />
+              <p className="font-semibold">Add More From Wishlist</p>
+            </div>
           </div>
           <div className="border-l border-gray-300 px-3">
             <h2 className="font-bold text-gray-500 mb-5">COUPONS</h2>
@@ -89,7 +97,10 @@ const Cart = () => {
                   Privacy Policy
                 </span>
               </p>
-              <button className="border w-full p-2 text-white text-lg font-semibold bg-myntra-studio cursor-pointer">
+              <button
+                onClick={() => navigate("/address")}
+                className="border w-full p-2 text-white text-lg font-semibold bg-myntra-studio cursor-pointer"
+              >
                 PLACE ORDER
               </button>
             </div>

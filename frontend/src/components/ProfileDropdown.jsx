@@ -16,8 +16,8 @@ const ProfileDropdown = ({ email, onLogout }) => {
       </div>
 
       <div className="px-3">
-        <MenuItem label="Orders" />
-        <MenuItem label="Wishlist" />
+        <MenuItem label="Orders" onClick={() => navigate("/orders")} />
+        <MenuItem label="Wishlist" onClick={() => navigate("/wishlist")} />
         <MenuItem label="Gift Cards" />
         <MenuItem label="Contact Us" />
         <MenuItem label="Myntra Insider" />
@@ -30,7 +30,7 @@ const ProfileDropdown = ({ email, onLogout }) => {
         <hr className="my-1 border-gray-300" />
         <MenuItem label="Edit Profile" />
         <button
-          className="w-full text-left px-4 py-1 text-sm text-[#ff3f6c] font-medium hover:bg-gray-50 cursor-pointer"
+          className="w-full text-left px-4 py-1 text-sm text-myntra-studio font-medium hover:bg-gray-50 cursor-pointer"
           onClick={onLogout}
         >
           Logout

@@ -17,7 +17,7 @@ export const sendOtp = async (req, res) => {
       OTP += digits[Math.floor(Math.random() * 10)];
     }
 
-    const otpExpiresAt = new Date(Date.now() + 60 * 1000);
+    const otpExpiresAt = new Date(Date.now() + 10 * 60 * 1000);
 
     await User.findOneAndUpdate(
       { email },
@@ -28,6 +28,7 @@ export const sendOtp = async (req, res) => {
     await sendOTPEmail(email, OTP);
     return res.status(200).json({ message: "OTP sent successfully" });
   } catch (error) {
+    console.error("sendOtp error:", error.message);
     return res.status(500).json({ message: error.message });
   }
 };

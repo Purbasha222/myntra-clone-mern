@@ -16,6 +16,11 @@ app.use((req, res, next) => {
   next();
 });
 
+// in your main server/index.js or app.js
+app.get("/", (req, res) => {
+  res.status(200).json({ message: "Server is running" });
+});
+
 app.use("/api/products", productRoutes);
 app.use("/auth", userRoutes);
 // app.use("/api/cart", cartRoutes);

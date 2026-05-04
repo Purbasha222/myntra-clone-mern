@@ -50,10 +50,10 @@ const Navbar = () => {
           onClick={() => navigate("/")}
         />
       </div>
-      {/* <div
+      <div
         className="flex items-center"
         onMouseLeave={() => setActiveMenu(null)}
-      ></div> */}
+      ></div>
       <div className="flex gap-8 items-center pl-10">
         {navItems.map((item) => (
           <a

@@ -1,5 +1,6 @@
 import { useSelector } from "react-redux";
 import ProfileSidebar from "../components/ProfileSidebar";
+import { useNavigate } from "react-router-dom";
 
 const gridCards = [
   {
@@ -118,6 +119,7 @@ export default function Profile() {
   const user = useSelector((state) => state.auth.email);
   //   const email = user?.email || "guest@example.com";
   //   const name = user?.name || "User";
+  const navigate = useNavigate();
 
   return (
     <div className="p-15">
@@ -149,6 +151,7 @@ export default function Profile() {
             {gridCards.map((card) => (
               <div
                 key={card.title}
+                onClick={() => navigate("/orders")}
                 className="bg-white py-8 px-6 flex flex-col items-center gap-2.5 cursor-pointer transition-shadow duration-200 hover:shadow-md"
               >
                 <div className="text-[#282c3f]">{card.icon}</div>

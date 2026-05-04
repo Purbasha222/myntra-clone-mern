@@ -1,5 +1,12 @@
 import { useNavigate } from "react-router-dom";
 
+const linkRoutes = {
+  Orders: "/orders",
+  Profile: "/profile",
+  Wishlist: "/wishlist",
+  "Edit Profile": "/profile",
+};
+
 const ProfileDropdown = ({ email, onLogout }) => {
   const navigate = useNavigate();
   return (
@@ -16,8 +23,8 @@ const ProfileDropdown = ({ email, onLogout }) => {
       </div>
 
       <div className="px-3">
-        <MenuItem label="Orders" />
-        <MenuItem label="Wishlist" />
+        <MenuItem label="Orders" navigate={navigate} />
+        <MenuItem label="Wishlist" navigate={navigate} />
         <MenuItem label="Gift Cards" />
         <MenuItem label="Contact Us" />
         <MenuItem label="Myntra Insider" />
@@ -28,7 +35,7 @@ const ProfileDropdown = ({ email, onLogout }) => {
         <MenuItem label="Saved VPA" />
         <MenuItem label="Saved Addresses" />
         <hr className="my-1 border-gray-300" />
-        <MenuItem label="Edit Profile" />
+        <MenuItem label="Edit Profile" navigate={navigate} />
         <button
           className="w-full text-left px-4 py-1 text-sm text-myntra-studio font-medium hover:bg-gray-50 cursor-pointer"
           onClick={onLogout}
@@ -40,8 +47,11 @@ const ProfileDropdown = ({ email, onLogout }) => {
   );
 };
 
-const MenuItem = ({ label }) => (
-  <button className="w-full text-left px-4 py-1 text-sm text-gray-700 hover:text-myntra-studio hover:bg-gray-50">
+const MenuItem = ({ label, navigate }) => (
+  <button
+    className="w-full text-left px-4 py-1 text-sm text-gray-700 hover:text-myntra-studio hover:bg-gray-50"
+    onClick={() => linkRoutes[label] && navigate(linkRoutes[label])}
+  >
     {label}
   </button>
 );

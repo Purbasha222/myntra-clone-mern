@@ -113,7 +113,8 @@ const Navbar = () => {
           className="relative cursor-pointer"
           onMouseEnter={() => setActiveMenu("PROFILE")}
           onMouseLeave={(e) => {
-            if (!e.currentTarget.contains(e.relatedTarget)) setActiveMenu(null);
+            if (!e.currentTarget?.contains(e.relatedTarget))
+              setActiveMenu(null);
           }}
         >
           <div>

@@ -33,10 +33,10 @@ const resend = new Resend(process.env.API_KEY);
 
 export const sendOTPEmail = async function (toEmail, otp) {
   const { data, error } = await resend.emails.send({
-    from: "Acme <onboarding@resend.dev>",
+    from: "Myntra <onboarding@resend.dev>",
     to: [toEmail],
     subject: "Your OTP",
-    html: `<p>Your OTP is<strong>${otp}</strong>. Valid for 10 minutes.</p>`,
+    html: `<p>Your OTP is <strong>${otp}</strong>. Valid for 10 minutes.</p>`,
   });
 
   if (error) {

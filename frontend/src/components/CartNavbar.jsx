@@ -1,6 +1,8 @@
+import { useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 
 const CartNavbar = () => {
+  const selectedItems = useSelector((state) => state.cart.selectedItems);
   const navigate = useNavigate();
   const location = useLocation();
   return (
@@ -22,15 +24,19 @@ const CartNavbar = () => {
         </p>
         <span>----------</span>
         <p
-          className={`${location.pathname === "/address" ? "text-myntra-beauty underline" : ""} cursor-pointer font-semibold`}
-          onClick={() => navigate("/address")}
+          className={`${location.pathname === "/address" ? "text-myntra-beauty underline" : ""} ${selectedItems.length === 0 ? "text-gray-300 cursor-not-allowed" : "cursor-pointer"} font-semibold`}
+          onClick={() =>
+            selectedItems.length === 0 ? "" : navigate("/address")
+          }
         >
           ADDRESS
         </p>
         <span>----------</span>
         <p
-          className={`${location.pathname === "/payment" ? "text-myntra-beauty underline" : ""} cursor-pointer font-semibold`}
-          onClick={() => navigate("/payment")}
+          className={`${location.pathname === "/payment" ? "text-myntra-beauty underline" : ""} ${selectedItems.length === 0 ? "text-gray-300 cursor-not-allowed" : "cursor-pointer"} font-semibold`}
+          onClick={() =>
+            selectedItems.length === 0 ? "" : navigate("/payment")
+          }
         >
           PAYMENT
         </p>

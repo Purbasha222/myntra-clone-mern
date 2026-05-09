@@ -19,6 +19,7 @@ import Profile from "./screens/Profile";
 import Address from "./screens/Address";
 import Payment from "./screens/Payment";
 import Orders from "./screens/Orders";
+import EditProfile from "./screens/EditProfile";
 
 function App() {
   const dispatch = useDispatch();
@@ -110,6 +111,14 @@ function App() {
           }
         />
         <Route
+          path="/orders"
+          element={
+            <ProtectedRoute>
+              <Orders />
+            </ProtectedRoute>
+          }
+        />
+        <Route
           path="/profile"
           element={
             <ProtectedRoute>
@@ -118,10 +127,10 @@ function App() {
           }
         />
         <Route
-          path="/orders"
+          path="/profile/edit"
           element={
             <ProtectedRoute>
-              <Orders />
+              <EditProfile />
             </ProtectedRoute>
           }
         />

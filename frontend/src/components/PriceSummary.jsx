@@ -1,9 +1,10 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const PriceSummary = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const selectedAddress = useSelector((state) => state.order.addresses);
   const selectedItems = useSelector((state) => state.cart.selectedItems);
   const cartItems = useSelector((state) => state.cart.cartItems);
@@ -59,17 +60,19 @@ const PriceSummary = () => {
             ₹{(totalPrice + 23 - totalPrice * 0.01).toFixed(2)}
           </p>
         </div>
-        <button
-          onClick={() => navigate("/payment")}
-          disabled={selectedAddress.length === 0}
-          className={`border w-full p-2 text-white text-lg font-semibold cursor-pointer ${
-            selectedAddress.length === 0
-              ? "bg-gray-400 cursor-not-allowed"
-              : "bg-myntra-studio"
-          }`}
-        >
-          CONTINUE
-        </button>
+        {location.pathname !== "/payment" && (
+          <button
+            onClick={() => navigate("/payment")}
+            disabled={selectedAddress.length === 0}
+            className={`border w-full p-2 text-white text-lg font-semibold cursor-pointer ${
+              selectedAddress.length === 0
+                ? "bg-gray-400 cursor-not-allowed"
+                : "bg-myntra-studio"
+            }`}
+          >
+            CONTINUE
+          </button>
+        )}
       </div>
     </div>
   );

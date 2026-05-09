@@ -98,8 +98,10 @@ const Cart = () => {
                 </span>
               </p>
               <button
-                onClick={() => navigate("/address")}
-                className="border w-full p-2 text-white text-lg font-semibold bg-myntra-studio cursor-pointer"
+                onClick={() =>
+                  selectedItems.length === 0 ? "" : navigate("/address")
+                }
+                className={`border w-full p-2 text-white text-lg font-semibold ${selectedItems.length === 0 ? "bg-gray-400 cursor-not-allowed" : "bg-myntra-studio cursor-pointer"}`}
               >
                 PLACE ORDER
               </button>

@@ -45,7 +45,9 @@ const Payment = () => {
         address: addresses[selectedAddressIndex],
         paymentMethod: selected,
         totalPrice: totalPrice,
+        status: "Order Placed",
         date: new Date().toISOString(),
+        id: Date.now(),
       }),
     );
     selectedItems.map((id) => dispatch(removeFromCart({ id })));
@@ -55,9 +57,7 @@ const Payment = () => {
 
   return (
     <div className="grid grid-cols-[3fr_2fr] gap-10 px-50 py-10">
-      {/* LEFT */}
       <div>
-        {/* Bank Offer */}
         <div className="border border-gray-300 p-4 mb-4 flex gap-3 items-center">
           <p className="font-semibold">Bank Offer</p>
           <p className="text-sm text-gray-500">
@@ -67,7 +67,6 @@ const Payment = () => {
 
         <h2 className="font-bold text-lg mb-3">Choose Payment Mode</h2>
 
-        {/* MynCash */}
         <div className="border border-gray-300 p-4 mb-4 flex items-center gap-3">
           <input type="checkbox" />
           <div>
@@ -76,7 +75,6 @@ const Payment = () => {
           </div>
         </div>
 
-        {/* Payment methods split */}
         <div className="border border-gray-300 flex">
           {/* Sidebar */}
           <div className="flex flex-col w-48 border-r border-gray-300">
@@ -95,7 +93,6 @@ const Payment = () => {
             ))}
           </div>
 
-          {/* Right panel */}
           <div className="flex-1 p-6">
             {selected === "UPI" && (
               <div>
@@ -136,7 +133,6 @@ const Payment = () => {
         </div>
       </div>
 
-      {/* RIGHT - reuse PriceSummary */}
       <PriceSummary />
     </div>
   );

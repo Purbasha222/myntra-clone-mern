@@ -6,6 +6,8 @@ const authSlice = createSlice({
     token: null,
     isAuthenticated: false,
     email: null,
+    name: null,
+    gender: null,
   },
   reducers: {
     login: (state, action) => {
@@ -18,8 +20,12 @@ const authSlice = createSlice({
       state.email = null;
       state.isAuthenticated = false;
     },
+    updateProfile: (state, action) => {
+      state.name = action.payload.name;
+      state.gender = action.payload.gender;
+    },
   },
 });
 
-export const { login, logout } = authSlice.actions;
+export const { login, logout, updateProfile } = authSlice.actions;
 export default authSlice.reducer;

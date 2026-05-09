@@ -4,7 +4,7 @@ const linkRoutes = {
   Orders: "/orders",
   Profile: "/profile",
   Wishlist: "/wishlist",
-  "Edit Profile": "/profile",
+  "Edit Profile": "/profile/edit",
 };
 
 const ProfileDropdown = ({ email, onLogout }) => {
@@ -49,7 +49,7 @@ const ProfileDropdown = ({ email, onLogout }) => {
 
 const MenuItem = ({ label, navigate }) => (
   <button
-    className="w-full text-left px-4 py-1 text-sm text-gray-700 hover:text-myntra-studio hover:bg-gray-50"
+    className="w-full text-left px-4 py-1 text-sm text-gray-700 hover:text-myntra-studio hover:bg-gray-50 cursor-pointer"
     onClick={() => linkRoutes[label] && navigate(linkRoutes[label])}
   >
     {label}

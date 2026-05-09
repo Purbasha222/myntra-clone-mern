@@ -32,6 +32,10 @@ const orderSlice = createSlice({
       }
       state.orders.push(action.payload);
     },
+    cancelOrder: (state, action) => {
+      const order = state.orders.find((order) => order.id === action.payload);
+      order.status = "Cancelled";
+    },
   },
 });
 
@@ -42,5 +46,6 @@ export const {
   selectAddress,
   setPaymentMethod,
   placeOrder,
+  cancelOrder,
 } = orderSlice.actions;
 export default orderSlice;

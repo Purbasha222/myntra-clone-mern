@@ -20,6 +20,7 @@ const sidebarLinks = {
 const linkRoutes = {
   "Orders & Returns": "/orders",
   Profile: "/profile",
+  "Collections & Wishlist": "/wishlist",
 };
 
 const ProfileSidebar = () => {

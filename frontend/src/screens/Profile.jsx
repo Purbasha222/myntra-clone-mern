@@ -116,42 +116,47 @@ const gridCards = [
 ];
 
 export default function Profile() {
-  const user = useSelector((state) => state.auth.email);
-  //   const email = user?.email || "guest@example.com";
-  //   const name = user?.name || "User";
+  const email = useSelector((state) => state.auth.email);
+  const name = useSelector((state) => state.auth.name);
+  const linkRoutes = {
+    Orders: "/orders",
+    "Collections & Wishlist": "/wishlist",
+  };
   const navigate = useNavigate();
 
   return (
     <div className="p-15">
       <div className="max-w-275 mx-auto px-4 py-8 pb-16 flex gap-7 items-start">
-        {/* ── SIDEBAR ── */}
         <ProfileSidebar />
 
-        {/* ── MAIN CONTENT ── */}
         <main className="flex-1 flex flex-col gap-4">
-          {/* Profile card */}
           <div className="bg-white px-8 py-7 flex items-center justify-between">
             <div className="flex items-center gap-6">
-              {/* Avatar */}
               <div className="w-22.5 h-22.5 rounded-full bg-[#c2c2c2] flex items-center justify-center shrink-0 overflow-hidden">
                 <svg viewBox="0 0 24 24" fill="#f5f5f6" className="w-14 h-14">
                   <path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z" />
                 </svg>
               </div>
-              <span className="text-[15px] text-[#282c3f]">{user}</span>
+              <span className="text-[15px] text-[#282c3f]">
+                {name || email}
+              </span>
             </div>
 
-            <button className="border border-[#282c3f] text-[#282c3f] text-[13px] font-bold tracking-widest uppercase px-5 py-2.5 transition-colors duration-150 hover:bg-[#282c3f] hover:text-white cursor-pointer">
+            <button
+              onClick={() => navigate("/profile/edit")}
+              className="border border-[#282c3f] text-[#282c3f] text-[13px] font-bold tracking-widest uppercase px-5 py-2.5 transition-colors duration-150 hover:bg-[#282c3f] hover:text-white cursor-pointer"
+            >
               EDIT PROFILE
             </button>
           </div>
 
-          {/* Grid cards */}
           <div className="grid grid-cols-3 gap-4">
             {gridCards.map((card) => (
               <div
                 key={card.title}
-                onClick={() => navigate("/orders")}
+                onClick={() =>
+                  linkRoutes[card.title] && navigate(linkRoutes[card.title])
+                }
                 className="bg-white py-8 px-6 flex flex-col items-center gap-2.5 cursor-pointer transition-shadow duration-200 hover:shadow-md"
               >
                 <div className="text-[#282c3f]">{card.icon}</div>

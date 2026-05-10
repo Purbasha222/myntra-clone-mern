@@ -21,6 +21,8 @@ const linkRoutes = {
   "Orders & Returns": "/orders",
   Profile: "/profile",
   "Collections & Wishlist": "/wishlist",
+  Addresses: "/profile/addresses",
+  "Delete Account": "/profile/delete-account",
 };
 
 const ProfileSidebar = () => {

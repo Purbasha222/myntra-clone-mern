@@ -7,6 +7,7 @@ import {
   selectAddress,
 } from "../redux/SLice/orderSlice";
 import AddressForm from "../components/AddressForm";
+import AddressCard from "../components/AddressCard";
 import PriceSummary from "../components/PriceSummary";
 
 const Address = () => {
@@ -38,49 +39,62 @@ const Address = () => {
         )}
 
         {addresses.map((addr, i) => (
-          <div
+          <AddressCard
             key={i}
-            className={`border rounded-md p-4 mb-3 ${selectedAddressIndex === i ? "border-gray-300 shadow-lg" : ""}`}
-          >
-            <div className="flex items-center gap-2 mb-1">
-              <input
-                type="radio"
-                checked={selectedAddressIndex === i}
-                onChange={() => dispatch(selectAddress(i))}
-              />
-              <p className="font-bold">{addr.name}</p>
-              <span className="rounded-md border border-myntra-beauty text-myntra-beauty text-xs font-semibold px-2 py-0.5">
-                {addr.type}
-              </span>
-            </div>
-            <p className="text-sm text-gray-600">
-              {addr.address}, {addr.city}, {addr.state} - {addr.pincode}
-            </p>
-            <div className="flex gap-1 mt-1">
-              <span className="text-gray-700">Mobile:</span>
-              <p className="font-bold">{addr.phone}</p>
-            </div>
-            <p className="text-sm text-gray-500 mt-1">
-              • Pay on Delivery available
-            </p>
-            <div className="flex gap-3 mt-3">
-              <button
-                onClick={() => dispatch(removeAddress(i))}
-                className="border px-3 py-1 rounded-md font-semibold text-sm cursor-pointer"
-              >
-                REMOVE
-              </button>
-              <button
-                className="border px-3 py-1 rounded-md font-semibold text-sm cursor-pointer"
-                onClick={() => {
-                  setEditIndex(i);
-                  setShowForm(true);
-                }}
-              >
-                EDIT
-              </button>
-            </div>
-          </div>
+            addr={addr}
+            index={i}
+            showRadio={true}
+            isSelected={selectedAddressIndex === i}
+            onSelect={(i) => dispatch(selectAddress(i))}
+            onEdit={(i) => {
+              setEditIndex(i);
+              setShowForm(true);
+            }}
+            onRemove={(i) => dispatch(removeAddress(i))}
+          />
+          // <div
+          //   key={i}
+          //   className={`border rounded-md p-4 mb-3 ${selectedAddressIndex === i ? "border-gray-300 shadow-lg" : ""}`}
+          // >
+          //   <div className="flex items-center gap-2 mb-1">
+          //     <input
+          //       type="radio"
+          //       checked={selectedAddressIndex === i}
+          //       onChange={() => dispatch(selectAddress(i))}
+          //     />
+          //     <p className="font-bold">{addr.name}</p>
+          //     <span className="rounded-md border border-myntra-beauty text-myntra-beauty text-xs font-semibold px-2 py-0.5">
+          //       {addr.type}
+          //     </span>
+          //   </div>
+          //   <p className="text-sm text-gray-600">
+          //     {addr.address}, {addr.city}, {addr.state} - {addr.pincode}
+          //   </p>
+          //   <div className="flex gap-1 mt-1">
+          //     <span className="text-gray-700">Mobile:</span>
+          //     <p className="font-bold">{addr.phone}</p>
+          //   </div>
+          //   <p className="text-sm text-gray-500 mt-1">
+          //     • Pay on Delivery available
+          //   </p>
+          //   <div className="flex gap-3 mt-3">
+          //     <button
+          //       onClick={() => dispatch(removeAddress(i))}
+          //       className="border px-3 py-1 rounded-md font-semibold text-sm cursor-pointer"
+          //     >
+          //       REMOVE
+          //     </button>
+          //     <button
+          //       className="border px-3 py-1 rounded-md font-semibold text-sm cursor-pointer"
+          //       onClick={() => {
+          //         setEditIndex(i);
+          //         setShowForm(true);
+          //       }}
+          //     >
+          //       EDIT
+          //     </button>
+          //   </div>
+          // </div>
         ))}
 
         {/* Add New Address form */}

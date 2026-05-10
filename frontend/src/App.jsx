@@ -20,6 +20,8 @@ import Address from "./screens/Address";
 import Payment from "./screens/Payment";
 import Orders from "./screens/Orders";
 import EditProfile from "./screens/EditProfile";
+import SavedAdresses from "./screens/SavedAdresses";
+import DeleteAccount from "./screens/DeleteAccount";
 
 function App() {
   const dispatch = useDispatch();
@@ -131,6 +133,22 @@ function App() {
           element={
             <ProtectedRoute>
               <EditProfile />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/profile/delete-account"
+          element={
+            <ProtectedRoute>
+              <DeleteAccount />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/profile/addresses"
+          element={
+            <ProtectedRoute>
+              <SavedAdresses />
             </ProtectedRoute>
           }
         />

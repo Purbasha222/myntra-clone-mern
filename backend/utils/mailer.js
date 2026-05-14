@@ -3,10 +3,12 @@ import nodemailer from "nodemailer";
 export const sendOTPEmail = async (toEmail, otp) => {
   const transporter = nodemailer.createTransport({
     service: "gmail",
-    // host: "smtp.gmail.com",
-    // port: 587,
-    // secure: false,
+    host: "smtp.gmail.com",
+    port: 465,
+    secure: true,
     family: 4,
+    connectionTimeout: 10000,
+    greetingTimeout: 10000,
     auth: {
       user: process.env.EMAIL_USER,
       pass: process.env.EMAIL_PASS,

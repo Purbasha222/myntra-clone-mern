@@ -57,7 +57,7 @@ A fully functional, production-deployed e-commerce web application inspired by M
 | Express.js           | REST API framework    |
 | MongoDB              | NoSQL database        |
 | JSON Web Token (JWT) | Stateless auth tokens |
-| Nodemailer           | OTP email delivery    |
+| Resend               | OTP email delivery    |
 
 ### Deployment
 
@@ -73,10 +73,11 @@ A fully functional, production-deployed e-commerce web application inspired by M
 
 ### Auth
 
-| Method | Endpoint               | Description             |
-| ------ | ---------------------- | ----------------------- |
-| `POST` | `/api/auth/send-otp`   | Send OTP to email       |
-| `POST` | `/api/auth/verify-otp` | Verify OTP & return JWT |
+| Method   | Endpoint                  | Description             |
+| -------- | ------------------------- | ----------------------- |
+| `POST`   | `/api/auth/send-otp`      | Send OTP to email       |
+| `POST`   | `/api/auth/verify-otp`    | Verify OTP & return JWT |
+| `DELETE` | `/profile/delete-account` | Delete Account          |
 
 ### Cart
 

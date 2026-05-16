@@ -4,6 +4,7 @@ import cors from "cors";
 import { connectDB } from "./config/db.js";
 import productRoutes from "./routes/product_routes.js";
 import userRoutes from "./routes/user_routes.js";
+import adminRoutes from "./routes/admin_routes.js";
 // import cartRoutes from "./routes/cart_routes.js";
 // import wishlistRoutes from "./routes/wishlist_routes.js";
 
@@ -21,6 +22,7 @@ app.get("/", (req, res) => {
   res.status(200).json({ message: "Server is running" });
 });
 
+app.use("/api/admin", adminRoutes);
 app.use("/api/products", productRoutes);
 app.use("/auth", userRoutes);
 // app.use("/api/cart", cartRoutes);

@@ -29,7 +29,7 @@ const Orders = () => {
           <div
             className="absolute inset-0 bg-black/30 backdrop-blur-sm"
             onClick={() => setModalOrderId(null)}
-          />
+          ></div>
           <div className="relative bg-white rounded-md shadow-xl p-8 w-[380px] flex flex-col items-center gap-4 z-10">
             <p className="text-[#282c3f] font-bold text-lg text-center">
               Cancel Order

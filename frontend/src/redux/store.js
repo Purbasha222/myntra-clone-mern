@@ -7,11 +7,12 @@ import { combineReducers } from "@reduxjs/toolkit";
 import cartSlice from "./SLice/cartSlice";
 import wishlistSlice from "./SLice/wishlistSlice";
 import orderSlice from "./SLice/orderSlice";
+import adminAuthSlice from "./SLice/adminAuthSlice";
 
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: ["auth", "cart", "wishlist", "order"],
+  whitelist: ["auth", "cart", "wishlist", "order", "admin"],
 };
 
 const rootReducer = combineReducers({
@@ -20,6 +21,7 @@ const rootReducer = combineReducers({
   cart: cartSlice.reducer,
   wishlist: wishlistSlice.reducer,
   order: orderSlice.reducer,
+  admin: adminAuthSlice,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

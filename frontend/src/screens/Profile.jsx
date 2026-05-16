@@ -128,7 +128,6 @@ export default function Profile() {
     <div className="p-15">
       <div className="max-w-275 mx-auto px-4 py-8 pb-16 flex gap-7 items-start">
         <ProfileSidebar />
-
         <main className="flex-1 flex flex-col gap-4">
           <div className="bg-white px-8 py-7 flex items-center justify-between">
             <div className="flex items-center gap-6">

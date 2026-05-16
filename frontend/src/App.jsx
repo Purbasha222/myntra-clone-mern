@@ -22,6 +22,11 @@ import Orders from "./screens/Orders";
 import EditProfile from "./screens/EditProfile";
 import SavedAdresses from "./screens/SavedAdresses";
 import DeleteAccount from "./screens/DeleteAccount";
+import AdminLogin from "./screens/AdminLogin";
+import AdminDashboard from "./screens/AdminDashboard";
+import AdminProtectedRoute from "./components/AdminProtectedRoute";
+import AdminUsers from "./screens/AdminUsers";
+import AdminProducts from "./screens/AdminProducts";
 
 function App() {
   const dispatch = useDispatch();
@@ -36,9 +41,10 @@ function App() {
 
   return (
     <div
-      className={`${location.pathname !== "/login" ? "pt-20" : ""} min-h-screen flex flex-col mt-auto`}
+      className={`${location.pathname !== "/login" && !location.pathname.startsWith("/admin") ? "pt-20" : ""} min-h-screen flex flex-col mt-auto`}
     >
       {location.pathname !== "/login" &&
+        !location.pathname.startsWith("/admin") &&
         (isCartPage || isAdressPage || isPaymentPage ? (
           <CartNavbar />
         ) : (
@@ -152,8 +158,34 @@ function App() {
             </ProtectedRoute>
           }
         />
+        <Route path="/admin" element={<AdminLogin />} />
+        <Route
+          path="/admin/dashboard"
+          element={
+            <AdminProtectedRoute>
+              <AdminDashboard />
+            </AdminProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin/users"
+          element={
+            <AdminProtectedRoute>
+              <AdminUsers />
+            </AdminProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin/products"
+          element={
+            <AdminProtectedRoute>
+              <AdminProducts />
+            </AdminProtectedRoute>
+          }
+        />
       </Routes>
-      {location.pathname !== "/login" && <Footer />}
+      {location.pathname !== "/login" &&
+        !location.pathname.startsWith("/admin") && <Footer />}
     </div>
   );
 }

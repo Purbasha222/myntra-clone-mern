@@ -6,7 +6,6 @@ const orderSlice = createSlice({
     addresses: [],
     selectedAddressIndex: 0,
     paymentMethod: "",
-    orders: [],
   },
   reducers: {
     addAddress: (state, action) => {
@@ -25,16 +24,6 @@ const orderSlice = createSlice({
     },
     setPaymentMethod: (state, action) => {
       state.paymentMethod = action.payload;
-    },
-    placeOrder: (state, action) => {
-      if (!state.orders) {
-        state.orders = [];
-      }
-      state.orders.push(action.payload);
-    },
-    cancelOrder: (state, action) => {
-      const order = state.orders.find((order) => order.id === action.payload);
-      order.status = "Cancelled";
     },
   },
 });

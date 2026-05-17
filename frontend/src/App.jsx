@@ -27,6 +27,7 @@ import AdminDashboard from "./screens/AdminDashboard";
 import AdminProtectedRoute from "./components/AdminProtectedRoute";
 import AdminUsers from "./screens/AdminUsers";
 import AdminProducts from "./screens/AdminProducts";
+import AdminOrders from "./screens/AdminOrders";
 
 function App() {
   const dispatch = useDispatch();
@@ -180,6 +181,14 @@ function App() {
           element={
             <AdminProtectedRoute>
               <AdminProducts />
+            </AdminProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin/orders"
+          element={
+            <AdminProtectedRoute>
+              <AdminOrders />
             </AdminProtectedRoute>
           }
         />

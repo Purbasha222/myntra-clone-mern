@@ -1,11 +1,12 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { placeOrder, setPaymentMethod } from "../redux/SLice/orderSlice";
+import { setPaymentMethod } from "../redux/SLice/orderSlice";
 import PriceSummary from "../components/PriceSummary";
 import { MdQrCode2 } from "react-icons/md";
 import toast from "react-hot-toast";
 import { removeFromCart } from "../redux/SLice/cartSlice";
+import { BASE_URL } from "../config.js";
 
 const paymentMethods = [
   { id: "COD", label: "Cash On Delivery (Cash/UPI)" },
@@ -21,6 +22,7 @@ const Payment = () => {
   const [selected, setSelected] = useState("UPI");
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const token = useSelector((state) => state.auth.token);
   const cartItems = useSelector((state) => state.cart.cartItems);
   const selectedItems = useSelector((state) => state.cart.selectedItems);
   const orderedItems = cartItems.filter((item) =>
@@ -37,19 +39,23 @@ const Payment = () => {
     0,
   );
 
-  const handleConfirm = () => {
+  const handleConfirm = async () => {
     dispatch(setPaymentMethod(selected));
-    dispatch(
-      placeOrder({
+    await fetch(`${BASE_URL}/api/orders`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
         items: orderedItems,
         address: addresses[selectedAddressIndex],
         paymentMethod: selected,
         totalPrice: totalPrice,
         status: "Order Placed",
-        date: new Date().toISOString(),
-        id: Date.now(),
       }),
-    );
+    });
+
     selectedItems.map((id) => dispatch(removeFromCart({ id })));
     toast.success("Order placed successfully!");
     navigate("/orders");

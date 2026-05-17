@@ -3,6 +3,7 @@ import bcrypt from "bcryptjs";
 import Admin from "../models/admin.model.js";
 import User from "../models/user.model.js";
 import Product from "../models/product.model.js";
+import Order from "../models/order.model.js";
 
 export const login = async (req, res) => {
   try {
@@ -60,10 +61,17 @@ export const getStats = async (req, res) => {
   try {
     const users = await User.countDocuments();
     const products = await Product.countDocuments();
-    if (!users || !products) {
-      return res.status(404).json({ message: "No Users or Products to show!" });
+    const orders = await Order.countDocuments();
+    if (!users || !products || !orders) {
+      return res.status(404).json({ message: "No Data!" });
     }
-    return res.status(200).json({ totalUsers: users, totalProducts: products });
+    return res
+      .status(200)
+      .json({
+        totalUsers: users,
+        totalProducts: products,
+        totalOrders: orders,
+      });
   } catch (error) {
     return res.status(500).json({ message: error.message });
   }

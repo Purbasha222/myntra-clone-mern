@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 
 const AdminDashboard = () => {
   const navigate = useNavigate();
+  const role = useSelector((state) => state.admin.role);
   const email = useSelector((state) => state.admin.email);
   const [stats, setStats] = useState(null);
   const token = useSelector((state) => state.admin.token);
@@ -30,6 +31,10 @@ const AdminDashboard = () => {
     {
       title: "Total Products",
       total: stats?.totalProducts,
+    },
+    {
+      title: "Total Orders",
+      total: stats?.totalOrders,
     },
   ];
   const gridCards = [
@@ -89,7 +94,7 @@ const AdminDashboard = () => {
   ];
   const linkRoutes = {
     Users: "/admin/users",
-    Products: "/api/products",
+    Products: "/admin/products",
     Orders: "/admin/orders",
   };
   return (
@@ -106,22 +111,20 @@ const AdminDashboard = () => {
               </div>
               <span className="text-[15px] text-[#282c3f]">{email}</span>
             </div>
+            <span className="p-2 font-semibold text-myntra-studio border border-myntra-studio rounded-sm">
+              {role}
+            </span>
           </div>
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-3 gap-4">
             {statCards.map((card) => (
               <div
                 key={card.title}
-                // onClick={() =>
-                //   linkRoutes[card.title] && navigate(linkRoutes[card.title])
-                // }
-                // className="bg-white py-8 px-6 flex flex-col items-center gap-2.5 cursor-pointer transition-shadow duration-200 hover:shadow-md"
-                className="bg-white py-8 px-6 flex flex-col items-center gap-2.5 border-l-4 border-myntra-women"
+                className="bg-white py-8 px-6 flex flex-col items-center gap-2.5 border-l-4 border-myntra-studio"
               >
-                {/* <div className="text-[#282c3f]">{card.total}</div> */}
                 <p className="text-4xl font-bold text-[#282c3f] text-center">
                   {card.total}
                 </p>
-                <p className="text-[12px] text-[#94969f] text-center">
+                <p className="text-[15px] text-[#94969f] text-center">
                   {card.title}
                 </p>
               </div>

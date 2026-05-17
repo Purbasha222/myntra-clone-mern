@@ -5,7 +5,7 @@ import { adminLogout } from "../redux/SLice/adminAuthSlice";
 
 const sidebarLinks = {
   OVERVIEW: ["Dashboard"],
-  MANAGE: ["Products", "Orders", "Delivery", "Users"],
+  MANAGE: ["Products", "Orders", "Users"],
   ADMIN: ["Logout"],
 };
 

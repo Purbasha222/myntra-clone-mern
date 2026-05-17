@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import ProductCard from "../components/ProductCard";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
@@ -9,23 +9,24 @@ import Sort from "../components/Sort";
 const Products = () => {
   const { category } = useParams();
   const dispatch = useDispatch();
-  console.log(category);
   const products = useSelector((state) => state.product.products);
-  console.log(products);
+  const filtered = products.filter((item) => item.category === category) || [];
+  const [sortOrder, setSortOrder] = useState("");
+  const sorted = [...filtered].sort((a, b) => {
+    if (sortOrder === "asc") return a.price - b.price;
+    if (sortOrder === "desc") return b.price - a.price;
+    return 0;
+  });
 
   useEffect(() => {
     dispatch(fetchProducts());
   }, [dispatch]);
 
-  const filtered = products.filter((item) => item.category === category) || [];
-  console.log(filtered);
-
   return (
     <div className="flex justify-between">
-      <Filter />
-      {/* <Sort /> */}
+      <Filter setSortOrder={setSortOrder} />
       <div className="grid grid-cols-5 p-10 gap-y-8 gap-7">
-        {filtered.map((item, index) => (
+        {sorted.map((item, index) => (
           <ProductCard item={item} key={index} />
         ))}
       </div>

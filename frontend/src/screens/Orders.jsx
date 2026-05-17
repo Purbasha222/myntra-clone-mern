@@ -1,23 +1,44 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import ProfileSidebar from "../components/ProfileSidebar";
-import { useState } from "react";
-import { cancelOrder } from "../redux/SLice/orderSlice";
+import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
+import { BASE_URL } from "../config.js";
 
 const Orders = () => {
-  const orders = useSelector((state) => state.order.orders);
   const navigate = useNavigate();
-  const dispatch = useDispatch();
   const [modalOrderId, setModalOrderId] = useState(null);
+
+  const [orders, setOrders] = useState([]);
+  const token = useSelector((state) => state.auth.token);
+
+  useEffect(() => {
+    const fetchOrders = async () => {
+      const res = await fetch(`${BASE_URL}/api/orders/myorders`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      const data = await res.json();
+      setOrders(data.orders);
+    };
+    fetchOrders();
+  }, []);
+
   const getDeliveryDate = (dateString) => {
     const date = new Date(dateString);
     date.setDate(date.getDate() + 5);
     return date.toDateString();
   };
 
-  const handleCancelConfirm = () => {
-    dispatch(cancelOrder(modalOrderId));
+  const handleCancelConfirm = async () => {
+    await fetch(`${BASE_URL}/api/orders/${modalOrderId}/cancel`, {
+      method: "PUT",
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    setOrders(
+      orders.map((o) =>
+        o._id === modalOrderId ? { ...o, status: "Cancelled" } : o,
+      ),
+    );
     toast.success("Order cancelled successfully!");
     setModalOrderId(null);
   };
@@ -79,7 +100,7 @@ const Orders = () => {
                 >
                   {!isCancelled && (
                     <button
-                      onClick={() => setModalOrderId(order.id)}
+                      onClick={() => setModalOrderId(order._id)}
                       className="absolute top-4 right-4 text-[12px] font-bold tracking-widest uppercase border border-myntra-kids text-myntra-kids px-3 py-1.5 hover:bg-red-50 transition-colors cursor-pointer"
                     >
                       CANCEL
@@ -99,7 +120,8 @@ const Orders = () => {
 
                     {!isCancelled && (
                       <p className="text-gray-400 text-sm">
-                        · Estimated delivery by {getDeliveryDate(order.date)}
+                        · Estimated delivery by{" "}
+                        {getDeliveryDate(order.createdAt)}
                       </p>
                     )}
                   </div>

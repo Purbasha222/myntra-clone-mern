@@ -10,6 +10,10 @@ import {
 } from "../controllers/admin.controller.js";
 import { getAllProducts } from "../controllers/products.controller.js";
 import { adminAuth } from "../middlewares/adminAuth.middleware.js";
+import {
+  getAllOrders,
+  updateOrderStatus,
+} from "../controllers/order.controller.js";
 
 const route = express.Router();
 
@@ -21,5 +25,7 @@ route.get("/getAllProducts", adminAuth, getAllProducts);
 route.post("/addProduct", adminAuth, addProduct);
 route.put("/updateProduct/:id", adminAuth, updateProduct);
 route.delete("/deleteProduct/:id", adminAuth, deleteProduct);
+route.get("/orders", adminAuth, getAllOrders);
+route.put("/orders/:id/status", adminAuth, updateOrderStatus);
 
 export default route;

@@ -10,9 +10,20 @@ const AdminModal = ({
   newProduct,
   setNewProduct,
   handleAddProduct,
+  originalProduct,
 }) => {
   const product = editProduct || newProduct;
   const setProduct = editProduct ? setEditProduct : setNewProduct;
+  const isUnchanged =
+    JSON.stringify(editProduct) === JSON.stringify(originalProduct);
+  const isAddDisabled =
+    newProduct &&
+    (!newProduct.title ||
+      !newProduct.brand ||
+      !newProduct.price ||
+      !newProduct.category ||
+      !newProduct.stock ||
+      !newProduct.thumbnail);
 
   return (
     <div>
@@ -122,12 +133,13 @@ const AdminModal = ({
                 CANCEL
               </button>
               <button
+                disabled={editProduct ? isUnchanged : isAddDisabled}
                 onClick={() =>
                   editProduct
                     ? handleEditProduct(editProduct._id)
                     : handleAddProduct()
                 }
-                className="flex-1 bg-pink-500 text-white text-[13px] font-bold tracking-widest uppercase py-2.5 cursor-pointer"
+                className={`flex-1 text-white text-[13px] font-bold tracking-widest uppercase py-2.5 ${(editProduct ? isUnchanged : isAddDisabled) ? "bg-pink-300 cursor-not-allowed" : "bg-myntra-studio cursor-pointer"}`}
               >
                 {editProduct ? "SAVE" : "ADD"}
               </button>

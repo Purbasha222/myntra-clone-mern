@@ -11,6 +11,7 @@ const AdminProducts = () => {
   const [newProduct, setNewProduct] = useState(null);
   const [editProduct, setEditProduct] = useState(null);
   const [modalProductId, setModalProductId] = useState(null);
+  const [originalProduct, setOriginalProduct] = useState(null);
   useEffect(() => {
     const fetchProducts = async () => {
       const res = await fetch(`${BASE_URL}/api/admin/getAllProducts`, {
@@ -45,6 +46,17 @@ const AdminProducts = () => {
   };
 
   const handleAddProduct = async () => {
+    if (
+      !newProduct.title ||
+      !newProduct.brand ||
+      !newProduct.price ||
+      !newProduct.category ||
+      !newProduct.stock ||
+      !newProduct.thumbnail
+    ) {
+      alert("Please fill all fields!");
+      return;
+    }
     const res = await fetch(`${BASE_URL}/api/admin/addProduct`, {
       method: "POST",
       headers: {
@@ -70,6 +82,7 @@ const AdminProducts = () => {
         newProduct={newProduct}
         setNewProduct={setNewProduct}
         handleAddProduct={handleAddProduct}
+         originalProduct={originalProduct}
       />
       <div className="max-w-275 mx-auto px-4 py-8 pb-16 flex gap-7 items-start">
         <div className="sticky top-0 shrink-0">
@@ -79,7 +92,7 @@ const AdminProducts = () => {
           <div className="flex justify-between">
             <p className="text-xl font-bold">All Products</p>
             <button
-              className="p-2 border border-myntra-studio rounded-sm uppercase font-bold text-myntra-studio"
+              className="p-2 border border-myntra-studio rounded-sm uppercase font-bold text-myntra-studio cursor-pointer"
               onClick={() =>
                 setNewProduct({
                   title: "",
@@ -130,7 +143,10 @@ const AdminProducts = () => {
                     <td className="py-5 flex justify-center items-center gap-3">
                       <button
                         className="text-blue-500 font-bold text-xs uppercase cursor-pointer"
-                        onClick={() => setEditProduct(product)}
+                        onClick={() => {
+                          setEditProduct(product);
+                          setOriginalProduct(product);
+                        }}
                       >
                         Edit
                       </button>
